@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>unmoshe</title>
+    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Cabeçalho Estilo Instagram -->
+        <header class="profile-header">
+            <img src="profile.jpg" alt="Foto de Perfil" class="profile-pic">
+            
+            <div class="profile-header-right">
+                <div class="profile-title">
+                    <h1>unmoshe <i class="fa-solid fa-circle-check verified-badge" title="Verificado"></i></h1>
+                </div>
+                <!-- Estatísticas dinâmicas (os zeros serão substituídos pelo script) -->
+                <div class="profile-stats">
+                    <div class="stat-item"><span class="stat-num" id="count-Projetos">0</span> projetos</div>
+                    <div class="stat-item"><span class="stat-num" id="count-conexoes">0</span> conexões</div>
+                    <div class="stat-item"><span class="stat-num" id="count-plataformas">0</span> plataformas</div>
+                </div>
+            </div>
+
+            <!-- Biografia -->
+            <div class="profile-bio">
+                Autodidata e polímata<br>
+                🇧🇷 | salvador, ba
+            </div>
+        </header>
+
+        <!-- Abas de Navegação -->
+        <div class="tabs-container">
+            <button class="tab-btn active" onclick="openTab('Projetos', this)">
+                <i class="fa-solid fa-wrench"></i> <span class="tab-text">Projetos</span>
+            </button>
+            <button class="tab-btn" onclick="openTab('conexoes', this)">
+                <i class="fa-solid fa-share-nodes"></i> <span class="tab-text">Conexões</span>
+            </button>
+            <button class="tab-btn" onclick="openTab('plataformas', this)">
+                <i class="fa-solid fa-gamepad"></i> <span class="tab-text">Plataformas</span>
+            </button>
+        </div>
+
+        <!-- Conteúdo das Abas (Feed) -->
+        <main class="feed-container">
+            
+            <!-- Projetos (Projetos) -->
+            <div id="Projetos" class="tab-content active">
+                <a class="grid-item" href="https://instagram.com/somostodosateus" target="_blank">
+                    <i class="fa-solid fa-atom"></i>
+                    <span>StA</span>
+                </a>
+                <a class="grid-item" href="https://instagram.com/subsoloalternativo" target="_blank">
+                    <i class="fa-solid fa-guitar"></i>
+                    <span>SubAlt</span>
+                </a>
+                <a class="grid-item" href="https://forumdevolga.byethost31.com/" target="_blank">
+                    <i class="fa-solid fa-people-group"></i>
+                    <span>FVolga</span>
+                </a>
+                <a class="grid-item" href="https://openkremlin.blogspot.com/" target="_blank">
+                    <i class="fa-solid fa-archway"></i>
+                    <span>OpKrem</span>
+                </a>
+            </div>
+
+            <!-- CONEXÕES (Redes Sociais) -->
+            <div id="conexoes" class="tab-content">
+                <a class="grid-item" href="https://instagram.com/unmoshe" target="_blank">
+                    <i class="fa-brands fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a class="grid-item" href="https://www.facebook.com/unmoshe/" target="_blank">
+                    <i class="fa-brands fa-facebook"></i>
+                    <span>Facebook</span>
+                </a>
+                <a class="grid-item" href="https://discord.com/users/293465168526966784" target="_blank">
+                    <i class="fa-brands fa-discord"></i>
+                    <span>Discord</span>
+                </a>
+                <a class="grid-item" href="https://open.spotify.com/user/31jpghiqdhnw5v22d7j3t4ru7qta?si=8f0lDKEtR5yuQgqcTED27Q" target="_blank">
+                    <i class="fa-brands fa-spotify"></i>
+                    <span>Spotify</span>
+                </a>
+                <a class="grid-item" href="https://www.reddit.com/user/unmoshe/" target="_blank">
+                    <i class="fa-brands fa-reddit-alien"></i>
+                    <span>Reddit</span>
+                </a>
+                <a class="grid-item" href="https://youtube.com/@unmoshe" target="_blank">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+                <a class="grid-item" href="https://t.me/unmoshe" target="_blank">
+                    <i class="fa-brands fa-telegram"></i>
+                    <span>Telegram</span>
+                </a>
+                <a class="grid-item" href="https://www.twitch.tv/unmoshe" target="_blank">
+                    <i class="fa-brands fa-twitch"></i>
+                    <span>Twitch</span>
+                </a>
+                <a class="grid-item" href="https://vk.com/unmoshe" target="_blank">
+                    <i class="fa-brands fa-vk"></i>
+                    <span>VKontakte</span>
+                </a>
+                <a class="grid-item" href="https://boxd.it/kig67" target="_blank">
+                    <i class="fa-brands fa-letterboxd"></i>
+                    <span>Letterboxd</span>
+                </a>
+                <a class="grid-item" href="https://www.behance.net/unmoshe" target="_blank">
+                    <i class="fa-brands fa-square-behance"></i>
+                    <span>Behance</span>
+                </a>
+                <a class="grid-item" href="https://soundcloud.com/unmoshe" target="_blank">
+                    <i class="fa-brands fa-soundcloud"></i>
+                    <span>Soundcloud</span>
+                </a>
+            </div>
+
+            <!-- PLATAFORMAS (Jogos) -->
+            <div id="plataformas" class="tab-content">
+                <a class="grid-item" href="https://steamcommunity.com/id/unmoshe" target="_blank">
+                    <i class="fa-brands fa-steam"></i>
+                    <span>Steam</span>
+                </a>
+                <a class="grid-item" href="https://chess.com/member/GM_unmoshe" target="_blank">
+                    <i class="fa-solid fa-chess-pawn"></i>
+                    <span>Chess.com</span>
+                </a>
+                <a class="grid-item" href="https://lichess.org/@/unmoshe" target="_blank">
+                    <i class="fa-solid fa-chess-knight"></i>
+                    <span>Lichess</span>
+                </a>
+                <a class="grid-item" href="https://roblox.com/pt/users/10960589649/profile" target="_blank">
+                    <i class="fa-brands fa-bitbucket"></i>
+                    <span>Roblox</span>
+                </a>
+                <a class="grid-item" href="https://xbox.com/pt-BR/play/user/Moshe2695" target="_blank">
+                    <i class="fa-brands fa-xbox"></i>
+                    <span>Xbox</span>
+                </a>
+                <a class="grid-item" href="https://profile.playstation.com/unmoshe" target="_blank">
+                    <i class="fa-brands fa-playstation"></i>
+                    <span>PlayStation</span>
+                </a>
+            </div>
+
+        </main>
+
+        <!-- Footer / Easter Egg -->
+        <footer>
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="easter-egg">
+                <i class="fa-solid fa-circle-info"></i> Política de Privacidade
+            </a>
+        </footer>
+
+        <audio id="troll-audio" src="audio.mp3"></audio>
+    </div>
+
+    <!-- Script para alternância de abas e contagem de itens -->
+    <script>
+        // Função para alternar as abas na mesma página
+        function openTab(tabId, element) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            element.classList.add('active');
+        }
+
+        // Função para contar os links automaticamente assim que a página carregar
+        window.onload = function() {
+            // Conta quantos links (.grid-item) existem dentro de cada aba
+            const totalProjetos = document.querySelectorAll('#Projetos .grid-item').length;
+            const totalConexoes = document.querySelectorAll('#conexoes .grid-item').length;
+            const totalPlataformas = document.querySelectorAll('#plataformas .grid-item').length;
+
+            // Atualiza os números no topo do perfil
+            document.getElementById('count-Projetos').innerText = totalProjetos;
+            document.getElementById('count-conexoes').innerText = totalConexoes;
+            document.getElementById('count-plataformas').innerText = totalPlataformas;
+        };
+    </script>
+</body>
+</html>

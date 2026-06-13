@@ -1,0 +1,281 @@
+/* Reset & Base */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: 'Merriweather', serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 935px; /* Tamanho limite padrão do feed do Instagram no PC */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* ================================
+   Cabeçalho de Perfil (Profile)
+   ================================ */
+.profile-header {
+    display: grid;
+    /* No Mobile: Foto à esquerda, Info à direita, Bio ocupando as duas colunas abaixo */
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+        "pic right"
+        "bio bio";
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+.profile-pic {
+    grid-area: pic;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #333;
+}
+
+.profile-header-right {
+    grid-area: right;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.profile-title {
+    display: flex;
+    align-items: center;
+}
+
+.profile-title h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.4rem;
+    margin: 0;
+    color: #ffffff;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+/* Selo de Verificado imitando o do Zuck */
+.verified-badge {
+    color: #0095f6; /* Azul do Instagram */
+    font-size: 1.1rem;
+    margin-left: 6px;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-item {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.95rem;
+    color: #e0e0e0;
+}
+
+.stat-num {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.profile-bio {
+    grid-area: bio;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #e0e0e0;
+}
+
+.profile-name-bold {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 5px;
+    display: inline-block;
+    font-size: 1rem;
+}
+
+/* ================================
+   Abas de Navegação (Tabs)
+   ================================ */
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #262626;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    color: #8e8e8e;
+    padding: 15px 0;
+    margin: 0 10%; /* Espaçamento flexível */
+    cursor: pointer;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-top: 1px solid transparent;
+    margin-top: -1px; /* Para sobrepor a borda do container */
+    transition: color 0.2s, border-top 0.2s;
+}
+
+.tab-btn.active {
+    color: #ffffff;
+    border-top: 1px solid #ffffff;
+}
+
+.tab-btn i {
+    font-size: 1.2rem;
+}
+
+/* Esconde o texto da aba no celular para focar nos ícones (igual ao app do Instagram) */
+.tab-text {
+    display: none;
+}
+
+/* ================================
+   Feed / Grid de Links
+   ================================ */
+.tab-content {
+    display: none; /* Fica escondido por padrão até o JS ativar */
+    /* 3 colunas no Mobile */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    padding-top: 4px;
+}
+
+.tab-content.active {
+    display: grid; /* Só mostra quando tem a classe active */
+}
+
+.grid-item {
+    background-color: #1e1e1e;
+    aspect-ratio: 1 / 1; /* Mantém os quadrados perfeitos */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #ffffff;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.grid-item:hover {
+    background-color: #2a2a2a;
+    transform: scale(0.98);
+}
+
+.grid-item i {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.grid-item span {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.75rem;
+    text-align: center;
+    padding: 0 5px;
+    letter-spacing: 0.5px;
+}
+
+/* ================================
+   Footer / Easter Egg
+   ================================ */
+footer {
+    margin-top: 50px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.easter-egg {
+    color: #444;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.2s;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+}
+
+.easter-egg:hover {
+    color: #888;
+}
+
+/* ================================
+   Configurações para Desktop (PC)
+   ================================ */
+@media (min-width: 768px) {
+    .profile-header {
+        grid-template-columns: 250px 1fr; /* Coluna da foto maior */
+        grid-template-areas:
+            "pic right"
+            "pic bio";
+        align-items: start;
+        margin-bottom: 50px;
+        margin-top: 40px;
+    }
+
+    .profile-pic {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+    }
+
+    .profile-title h1 {
+        font-size: 1.8rem;
+    }
+
+    .verified-badge {
+        font-size: 1.2rem;
+    }
+
+    .profile-stats {
+        gap: 40px; /* Mais espaço entre as estatísticas no PC */
+    }
+
+    .stat-item {
+        font-size: 1.1rem;
+    }
+
+    .profile-bio {
+        font-size: 1rem;
+    }
+
+    /* Espaçamento das abas maior no PC */
+    .tab-btn {
+        margin: 0 40px; 
+    }
+
+    /* Mostra o texto da aba no PC */
+    .tab-text {
+        display: inline;
+    }
+
+    .tab-content {
+        /* 5 colunas no Desktop (PC) */
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        padding-top: 10px;
+    }
+
+    /* Ícones maiores no PC */
+    .grid-item i {
+        font-size: 3rem;
+        margin-bottom: 12px;
+    }
+
+    .grid-item span {
+        font-size: 0.9rem;
+    }
+}
