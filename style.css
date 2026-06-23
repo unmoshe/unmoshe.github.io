@@ -6,7 +6,7 @@
     --bg-card: #080808;
     
     --text-pure: #ffffff;
-    --text-muted: #a3a3a3;
+    --text-muted: #d0d0d0; /* mais claro para melhor contraste */
     
     --border-accent: #ffffff;
     
@@ -119,6 +119,23 @@ body::before {
     color: var(--text-pure);
     text-decoration: none;
     transition: all 0.3s ease;
+    position: relative; /* para o underline animado */
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--text-pure);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
 }
 
 .nav-links a:hover {
@@ -145,18 +162,22 @@ body::before {
 
 .brand-title {
     font-family: var(--font-heading);
-    font-size: 4rem;
-    font-weight: 500;
+    font-size: 4.5rem;
+    font-weight: 700;
     color: var(--text-pure);
     line-height: 1.1;
     margin-bottom: 20px;
+    letter-spacing: 4px;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
 }
 
 .bio-text {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: var(--text-muted);
     font-style: italic;
     margin-bottom: 30px;
+    line-height: 1.8;
+    letter-spacing: 0.5px;
 }
 
 .hero-divider {
@@ -176,9 +197,11 @@ body::before {
     max-width: 450px;
     object-fit: cover;
     border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-    animation: morph 8s ease-in-out infinite;
-    border-bottom: 5px solid var(--text-pure);
-    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.08);
+    animation: morph 10s ease-in-out infinite;
+    border: 2px solid #333;
+    outline: 1px solid #555;
+    outline-offset: 4px;
+    box-shadow: 0 20px 50px rgba(255, 255, 255, 0.05);
 }
 
 @keyframes morph {
@@ -205,25 +228,62 @@ body::before {
     padding: 12px 45px;
     border-radius: 50px;
     text-decoration: none;
-    color: var(--bg-pure);
-    background-color: var(--text-pure);
-    border: 1px solid var(--text-pure);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15); /* Sombreamento suave para destaque */
-    transition: all 0.3s ease;
+    color: var(--text-pure);
+    background: transparent;
+    border: 1.5px solid var(--text-pure);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+    transition: color 0.4s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.action-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: var(--text-pure);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    transition: width 0.6s ease, height 0.6s ease;
 }
 
 .action-btn:hover {
-    color: var(--text-pure);
-    background-color: var(--bg-pure);
-    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
+    color: var(--bg-pure);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+}
+
+.action-btn:hover::before {
+    width: 300%;
+    height: 300%;
 }
 
 /* ==========================================================================
    Cards e Grids
    ========================================================================== */
 .content-section {
-    margin-bottom: 80px;
+    margin-bottom: 100px;
     scroll-margin-top: 120px;
+    position: relative;
+}
+
+/* Divisor decorativo entre seções */
+.content-section::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--text-pure), transparent);
+    margin: 60px auto 0;
+    opacity: 0.3;
+}
+
+.content-section:last-of-type::after {
+    display: none;
 }
 
 .grid-container {
@@ -237,10 +297,10 @@ body::before {
 }
 
 .grid-card {
-    background-color: var(--bg-card);
-    border: 1px solid #111;
+    background: linear-gradient(145deg, #0a0a0a, #050505);
+    border: 1px solid #1a1a1a;
     border-bottom: 3px solid var(--border-accent);
-    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.03);
     aspect-ratio: 1 / 1;
     display: flex;
     flex-direction: column;
@@ -248,7 +308,7 @@ body::before {
     justify-content: center;
     text-decoration: none;
     border-radius: 6px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     padding: 20px;
 }
 
@@ -271,8 +331,10 @@ body::before {
 }
 
 .grid-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(255, 255, 255, 0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.08);
+    border-bottom-color: #cccccc;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .grid-card:hover .favicon {
@@ -280,12 +342,58 @@ body::before {
 }
 
 /* ==========================================================================
+   Estilos para a página "Sobre"
+   ========================================================================== */
+.about-wrapper {
+    background: linear-gradient(145deg, #0a0a0a, #050505);
+    border: 1px solid #1a1a1a;
+    border-bottom: 3px solid var(--border-accent);
+    border-radius: 6px;
+    padding: 50px;
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.03);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-paragraph {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+    line-height: 2;
+    text-align: justify;
+    letter-spacing: 0.3px;
+}
+
+.about-paragraph strong {
+    color: var(--text-pure);
+}
+
+@media (max-width: 768px) {
+    .about-wrapper {
+        padding: 30px 20px;
+    }
+}
+
+/* ==========================================================================
+   Animação de entrada (fade-in)
+   ========================================================================== */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* ==========================================================================
    Rodapé
    ========================================================================== */
 .site-footer {
-    border-top: 1px solid #111;
+    border-top: 1px solid #1a1a1a;
     background-color: var(--bg-pure);
     margin-top: 40px;
+    padding-top: 20px;
 }
 
 .footer-content {
@@ -295,6 +403,14 @@ body::before {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+}
+
+.footer-content::before {
+    content: '•';
+    color: #444;
+    margin: 0 15px;
+    display: none; /* escondemos pois usamos o span no HTML */
 }
 
 .copyright {
@@ -350,6 +466,10 @@ body::before {
         margin: 0 auto;
     }
     
+    .brand-title {
+        font-size: 3.5rem;
+    }
+    
     /* Configuração Padrão Mobile (Projetos e Plataformas) - 2 por linha */
     .grid-container {
         grid-template-columns: repeat(2, 1fr);
@@ -363,17 +483,17 @@ body::before {
     }
     
     .compact-grid .grid-card {
-        padding: 15px 5px; /* Reduz padding para dar espaço ao texto */
+        padding: 15px 5px;
     }
     
     .compact-grid .grid-card .favicon {
-        width: 32px; /* Ícones menores para economizar espaço */
+        width: 32px;
         height: 32px;
         margin-bottom: 10px;
     }
     
     .compact-grid .grid-card span {
-        font-size: 0.7rem; /* Fonte menor para evitar quebra excessiva de linha */
+        font-size: 0.7rem;
         letter-spacing: 0.5px;
     }
     
@@ -381,6 +501,10 @@ body::before {
         flex-direction: column;
         gap: 15px;
         text-align: center;
+    }
+    
+    .footer-content::before {
+        display: none;
     }
 }
 

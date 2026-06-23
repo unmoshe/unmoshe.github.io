@@ -12,38 +12,6 @@
     
     <!-- Reaproveita o mesmo CSS da página inicial -->
     <link rel="stylesheet" href="style.css">
-
-    <style>
-        /* Estilos específicos adicionais apenas para o bloco de texto do "Sobre" */
-        .about-wrapper {
-            background-color: var(--bg-card);
-            border: 1px solid #111;
-            border-bottom: 3px solid var(--border-accent);
-            border-radius: 6px;
-            padding: 50px;
-            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.05);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .about-paragraph {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-            line-height: 1.8;
-            text-align: justify;
-        }
-
-        .about-paragraph strong {
-            color: var(--text-pure);
-        }
-
-        @media (max-width: 768px) {
-            .about-wrapper {
-                padding: 30px 20px;
-            }
-        }
-    </style>
 </head>
 <body>
 
@@ -67,12 +35,12 @@
     <main class="main-container">
         
         <section class="content-section" style="margin-bottom: 40px;">
-            <div style="text-align: center; margin-bottom: 40px;">
+            <div style="text-align: center; margin-bottom: 40px;" class="fade-in">
                 <h1 class="brand-title" style="font-size: 3.5rem;">SOBRE MIM</h1>
                 <div class="hero-divider" style="margin: 0 auto;"></div>
             </div>
 
-            <div class="about-wrapper">
+            <div class="about-wrapper fade-in">
                 <p class="about-paragraph">
                     Na minha bio diz "Autodidata e polímata". Em bom português: eu tenho uma certa alergia ao tédio e aprendo sozinho o que me dá na telha. A tecnologia é o meu quintal, mas isso não significa que eu vou hackear o wifi do seu vizinho se você pedir. Eu tenho um interesse bem particular por <strong>segurança, táticas e armamento</strong> — o que soa exatamente como a descrição de um vilão do James Bond, mas prometo que sou um cara tranquilo. Pelo menos na maior parte do tempo.
                 </p>
@@ -100,7 +68,7 @@
         </section>
 
         <!-- Botão Voltar -->
-        <div class="hero-actions">
+        <div class="hero-actions fade-in">
             <a href="index.html" class="action-btn">Voltar</a>
         </div>
 
