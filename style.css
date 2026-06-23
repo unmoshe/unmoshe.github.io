@@ -374,7 +374,7 @@ body::before {
 }
 
 /* ==========================================================================
-   Responsividade (mantida)
+   RESPONSIVIDADE MOBILE (ALTERAÇÕES SOLICITADAS)
    ========================================================================== */
 @media (max-width: 768px) {
     .nav-container {
@@ -386,18 +386,21 @@ body::before {
         flex-wrap: wrap;
         justify-content: center;
     }
+
+    /* 1. HERO: agora lado a lado no mobile (igual desktop) */
     .hero-section {
-        grid-template-columns: 1fr;
-        text-align: center;
+        grid-template-columns: 1fr 1fr;
+        text-align: left;
         gap: 40px;
     }
     .hero-avatar-area {
-        justify-content: center;
-        order: -1;
+        justify-content: flex-end;
+        order: 0; /* remove a inversão que colocava a foto em cima */
     }
     .hero-divider {
-        margin: 0 auto;
+        margin: 0; /* volta a ficar alinhado à esquerda */
     }
+
     .brand-title {
         font-size: 3.5rem;
     }
@@ -408,14 +411,24 @@ body::before {
         font-size: 1rem;
         line-height: 1.8;
     }
+
+    /* Grid padrão (Projetos) - 2 colunas */
     .grid-container {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
+
+    /* Grid compacto (Conexões) - 3 colunas */
     .compact-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
     }
+
+    /* 2. PLATAFORMAS: 3 colunas (3x2) */
+    #plataformas .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     .compact-grid .grid-card {
         padding: 15px 5px;
     }
@@ -435,6 +448,7 @@ body::before {
     }
 }
 
+/* Ajuste fino para telas mobile muito pequenas (ex: iPhone SE, antigos) */
 @media (max-width: 380px) {
     .compact-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -488,7 +502,7 @@ body::before {
 
 .note-icon {
     font-size: 2.2rem;
-    color: #ffffff;; /* branco premium */
+    color: #ffffff; /* branco premium */
     flex-shrink: 0;
     width: 3rem;
     text-align: center;
