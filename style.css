@@ -4,12 +4,9 @@
 :root {
     --bg-pure: #000000;
     --bg-card: #080808;
-    
     --text-pure: #ffffff;
-    --text-muted: #d0d0d0; /* mais claro para melhor contraste */
-    
+    --text-muted: #d0d0d0;
     --border-accent: #ffffff;
-    
     --font-heading: 'Oswald', sans-serif;
     --font-body: 'Merriweather', serif;
 }
@@ -30,7 +27,7 @@ body {
     position: relative;
 }
 
-/* Efeito sutil de ruído analógico de fundo */
+/* Ruído de fundo (mantido) */
 body::before {
     content: "";
     position: fixed;
@@ -44,7 +41,6 @@ body::before {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Container Principal */
 .main-container {
     width: 100%;
     max-width: 1100px;
@@ -53,7 +49,7 @@ body::before {
 }
 
 /* ==========================================================================
-   Navegação Topo (Inspirado no layout modelo)
+   Navegação
    ========================================================================== */
 .navbar {
     width: 100%;
@@ -64,7 +60,6 @@ body::before {
     left: 0;
     z-index: 100;
 }
-
 .nav-container {
     max-width: 1100px;
     margin: 0 auto;
@@ -73,25 +68,21 @@ body::before {
     justify-content: space-between;
     align-items: center;
 }
-
 .logo-wrapper {
     display: flex;
     align-items: center;
     gap: 15px;
 }
-
 .logo-img {
     width: 60px;
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.15));
 }
-
 .logo-text {
     display: flex;
     flex-direction: column;
 }
-
 .logo-text .title {
     font-family: var(--font-heading);
     color: var(--text-pure);
@@ -100,17 +91,14 @@ body::before {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-
 .logo-text .subtitle {
     font-size: 0.7rem;
     color: var(--text-muted);
 }
-
 .nav-links {
     display: flex;
     gap: 30px;
 }
-
 .nav-links a {
     font-family: var(--font-heading);
     font-size: 0.9rem;
@@ -119,9 +107,8 @@ body::before {
     color: var(--text-pure);
     text-decoration: none;
     transition: all 0.3s ease;
-    position: relative; /* para o underline animado */
+    position: relative;
 }
-
 .nav-links a::after {
     content: '';
     position: absolute;
@@ -132,19 +119,17 @@ body::before {
     background: var(--text-pure);
     transition: width 0.3s ease;
 }
-
 .nav-links a:hover::after,
 .nav-links a.active::after {
     width: 100%;
 }
-
 .nav-links a:hover {
     color: var(--text-muted);
     text-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
 }
 
 /* ==========================================================================
-   Seção Hero (Equilíbrio Texto/Imagem)
+   Hero
    ========================================================================== */
 .hero-section {
     display: grid;
@@ -153,13 +138,11 @@ body::before {
     align-items: center;
     margin-bottom: 60px;
 }
-
 .hero-text-area {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-
 .brand-title {
     font-family: var(--font-heading);
     font-size: 4.5rem;
@@ -170,7 +153,6 @@ body::before {
     letter-spacing: 4px;
     text-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
 }
-
 .bio-text {
     font-size: 1.3rem;
     color: var(--text-muted);
@@ -179,19 +161,16 @@ body::before {
     line-height: 1.8;
     letter-spacing: 0.5px;
 }
-
 .hero-divider {
     width: 60px;
     height: 4px;
     background-color: var(--text-pure);
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
 }
-
 .hero-avatar-area {
     display: flex;
     justify-content: flex-end;
 }
-
 .profile-pic {
     width: 100%;
     max-width: 450px;
@@ -203,7 +182,6 @@ body::before {
     outline-offset: 4px;
     box-shadow: 0 20px 50px rgba(255, 255, 255, 0.05);
 }
-
 @keyframes morph {
     0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
     50% { border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
@@ -211,67 +189,13 @@ body::before {
 }
 
 /* ==========================================================================
-   Ações Principais (Botão Sobre Mim)
-   ========================================================================== */
-.hero-actions {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 80px;
-}
-
-.action-btn {
-    font-family: var(--font-heading);
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 2px;
-    padding: 12px 45px;
-    border-radius: 50px;
-    text-decoration: none;
-    color: var(--text-pure);
-    background: transparent;
-    border: 1.5px solid var(--text-pure);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
-    transition: color 0.4s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.action-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: var(--text-pure);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    transition: width 0.6s ease, height 0.6s ease;
-}
-
-.action-btn:hover {
-    color: var(--bg-pure);
-    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
-}
-
-.action-btn:hover::before {
-    width: 300%;
-    height: 300%;
-}
-
-/* ==========================================================================
-   Cards e Grids
+   Cards e Grids (mantido)
    ========================================================================== */
 .content-section {
     margin-bottom: 100px;
     scroll-margin-top: 120px;
     position: relative;
 }
-
-/* Divisor decorativo entre seções */
 .content-section::after {
     content: '';
     display: block;
@@ -281,21 +205,17 @@ body::before {
     margin: 60px auto 0;
     opacity: 0.3;
 }
-
 .content-section:last-of-type::after {
     display: none;
 }
-
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 20px;
 }
-
 .compact-grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
 }
-
 .grid-card {
     background: linear-gradient(145deg, #0a0a0a, #050505);
     border: 1px solid #1a1a1a;
@@ -311,7 +231,6 @@ body::before {
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     padding: 20px;
 }
-
 .grid-card .favicon {
     width: 48px;
     height: 48px;
@@ -320,7 +239,6 @@ body::before {
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9));
     transition: transform 0.3s ease;
 }
-
 .grid-card span {
     font-family: var(--font-heading);
     font-size: 1rem;
@@ -329,32 +247,42 @@ body::before {
     text-transform: uppercase;
     text-align: center;
 }
-
 .grid-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 15px 40px rgba(255, 255, 255, 0.08);
     border-bottom-color: #cccccc;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
-
 .grid-card:hover .favicon {
     transform: scale(1.1);
 }
 
 /* ==========================================================================
-   Estilos para a página "Sobre"
+   Página Sobre (original)
    ========================================================================== */
 .about-wrapper {
-    background: linear-gradient(145deg, #0a0a0a, #050505);
-    border: 1px solid #1a1a1a;
+    background: linear-gradient(145deg, #0d0d0d, #070707);
+    border: 1px solid #2a2a2a;
     border-bottom: 3px solid var(--border-accent);
-    border-radius: 6px;
-    padding: 50px;
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.03);
-    max-width: 800px;
+    border-radius: 12px;
+    padding: 60px;
+    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.05);
+    max-width: 1000px;
     margin: 0 auto;
+    position: relative;
+    overflow: hidden;
 }
-
+.about-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ffffff11, #ffffff00, #ffffff11);
+    z-index: -1;
+    border-radius: 14px;
+}
 .about-paragraph {
     font-size: 1.15rem;
     color: var(--text-muted);
@@ -363,25 +291,45 @@ body::before {
     text-align: justify;
     letter-spacing: 0.3px;
 }
-
 .about-paragraph strong {
     color: var(--text-pure);
 }
 
-@media (max-width: 768px) {
-    .about-wrapper {
-        padding: 30px 20px;
-    }
+/* ==========================================================================
+   Página Ebooks (original)
+   ========================================================================== */
+.ebook-content {
+    text-align: center;
+    padding: 80px 20px;
+}
+.ebook-content h2 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: var(--text-pure);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+.ebook-content .coming-soon {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    font-style: italic;
+}
+.ebook-content .description {
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-size: 1.1rem;
 }
 
 /* ==========================================================================
-   Animação de entrada (fade-in)
+   Animação fade-in
    ========================================================================== */
 .fade-in {
     opacity: 0;
     animation: fadeIn 0.8s ease forwards;
 }
-
 @keyframes fadeIn {
     to { opacity: 1; }
 }
@@ -395,7 +343,6 @@ body::before {
     margin-top: 40px;
     padding-top: 20px;
 }
-
 .footer-content {
     max-width: 1100px;
     margin: 0 auto;
@@ -405,14 +352,6 @@ body::before {
     align-items: center;
     position: relative;
 }
-
-.footer-content::before {
-    content: '•';
-    color: #444;
-    margin: 0 15px;
-    display: none; /* escondemos pois usamos o span no HTML */
-}
-
 .copyright {
     font-family: var(--font-heading);
     font-size: 0.85rem;
@@ -420,7 +359,6 @@ body::before {
     letter-spacing: 1px;
     text-transform: uppercase;
 }
-
 .disclaimer-link {
     font-family: var(--font-heading);
     font-size: 0.85rem;
@@ -430,91 +368,167 @@ body::before {
     text-transform: uppercase;
     transition: color 0.3s ease;
 }
-
 .disclaimer-link:hover {
     color: var(--text-pure);
     text-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
 }
 
 /* ==========================================================================
-   Responsividade Mobile (Com ajustes precisos de Grid)
+   Responsividade (mantida)
    ========================================================================== */
 @media (max-width: 768px) {
     .nav-container {
         flex-direction: column;
         gap: 15px;
     }
-    
     .nav-links {
         gap: 15px;
         flex-wrap: wrap;
         justify-content: center;
     }
-    
     .hero-section {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 40px;
     }
-    
     .hero-avatar-area {
         justify-content: center;
         order: -1;
     }
-    
     .hero-divider {
         margin: 0 auto;
     }
-    
     .brand-title {
         font-size: 3.5rem;
     }
-    
-    /* Configuração Padrão Mobile (Projetos e Plataformas) - 2 por linha */
+    .about-wrapper {
+        padding: 30px 20px;
+    }
+    .about-paragraph {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
     .grid-container {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
-    
-    /* Configuração Compacta Mobile (Conexões) - 3 por linha */
     .compact-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
     }
-    
     .compact-grid .grid-card {
         padding: 15px 5px;
     }
-    
     .compact-grid .grid-card .favicon {
         width: 32px;
         height: 32px;
         margin-bottom: 10px;
     }
-    
     .compact-grid .grid-card span {
         font-size: 0.7rem;
         letter-spacing: 0.5px;
     }
-    
     .footer-content {
         flex-direction: column;
         gap: 15px;
         text-align: center;
     }
-    
-    .footer-content::before {
-        display: none;
-    }
 }
 
-/* Ajuste fino para telas mobile muito pequenas (ex: iPhone SE, antigos) */
 @media (max-width: 380px) {
     .compact-grid {
         grid-template-columns: repeat(3, 1fr);
     }
-    
     .compact-grid .grid-card span {
         font-size: 0.6rem;
+    }
+}
+
+/* ==========================================================================
+   NOVOS ESTILOS: CADERNO E RABISCOS (para Sobre e Ebooks)
+   ========================================================================== */
+
+/* Fundo com linhas de caderno (sutil) */
+.notebook-bg {
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 29px,
+        rgba(255, 255, 255, 0.05) 29px,
+        rgba(255, 255, 255, 0.05) 30px
+    );
+    background-size: 100% 30px;
+}
+
+/* Borda com aspecto de rabisco (duas camadas: dashed + dotted) */
+.sketch-border {
+    border: 2px dashed #888;
+    border-radius: 12px;
+    position: relative;
+}
+.sketch-border::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 1px dotted #aaa;
+    border-radius: 14px;
+    pointer-events: none;
+}
+
+/* Parágrafo com ícone de rabisco */
+.note-paragraph {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    padding: 10px 0;
+}
+
+.note-icon {
+    font-size: 2.2rem;
+    color: #ffffff;; /* branco premium */
+    flex-shrink: 0;
+    width: 3rem;
+    text-align: center;
+    margin-top: 5px;
+    opacity: 0.8;
+    transition: transform 0.3s ease;
+}
+
+.note-paragraph:hover .note-icon {
+    transform: rotate(-10deg) scale(1.1);
+}
+
+.note-text {
+    flex: 1;
+    margin: 0;
+}
+
+/* Ícone grande de livro (página Ebooks) */
+.ebook-icon-big {
+    font-size: 6rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    display: block;
+    opacity: 0.6;
+    transition: transform 0.5s ease;
+}
+.ebook-icon-big:hover {
+    transform: rotate(-5deg) scale(1.05);
+}
+
+/* Ajuste mobile para os parágrafos com ícone */
+@media (max-width: 768px) {
+    .note-paragraph {
+        gap: 15px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .note-icon {
+        font-size: 2rem;
+        width: auto;
     }
 }
