@@ -27,13 +27,13 @@ body {
     position: relative;
 }
 
-/* Ruído de fundo (mantido) */
+/* Ruído de fundo (mantido e corrigido para não gerar scroll horizontal) */
 body::before {
     content: "";
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     opacity: 0.03;
     pointer-events: none;
@@ -374,7 +374,7 @@ body::before {
 }
 
 /* ==========================================================================
-   RESPONSIVIDADE MOBILE (ALTERAÇÕES SOLICITADAS)
+   RESPONSIVIDADE MOBILE (CORRIGIDA)
    ========================================================================== */
 @media (max-width: 768px) {
     .nav-container {
@@ -387,23 +387,32 @@ body::before {
         justify-content: center;
     }
 
-    /* 1. HERO: agora lado a lado no mobile (igual desktop) */
+    /* 1. HERO: Lado a lado e perfeitamente contido na tela sem vazar */
     .hero-section {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 60% 35%; /* Usa porcentagem para garantir espaço fixo */
         text-align: left;
-        gap: 40px;
+        gap: 5%; /* O gap completa os 100% matematicamente */
+        align-items: center;
     }
     .hero-avatar-area {
         justify-content: flex-end;
-        order: 0; /* remove a inversão que colocava a foto em cima */
+        order: 0; 
     }
     .hero-divider {
-        margin: 0; /* volta a ficar alinhado à esquerda */
+        margin: 0;
+        width: 40px; /* Reduzido levemente para o mobile */
     }
 
     .brand-title {
-        font-size: 3.5rem;
+        font-size: 1.8rem; /* Reduzido drasticamente para evitar o vazamento horizontal e necessidade de diminuir zoom */
+        letter-spacing: 2px;
+        margin-bottom: 10px;
     }
+    .bio-text {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+    
     .about-wrapper {
         padding: 30px 20px;
     }
@@ -424,23 +433,30 @@ body::before {
         gap: 10px;
     }
 
-    /* 2. PLATAFORMAS: 3 colunas (3x2) */
+    /* 2. PLATAFORMAS: 3 colunas e ajuste de padding para caber na tela */
     #plataformas .grid-container {
         grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
     }
 
+    #plataformas .grid-card,
     .compact-grid .grid-card {
         padding: 15px 5px;
     }
+    
+    #plataformas .grid-card .favicon,
     .compact-grid .grid-card .favicon {
         width: 32px;
         height: 32px;
         margin-bottom: 10px;
     }
+    
+    #plataformas .grid-card span,
     .compact-grid .grid-card span {
         font-size: 0.7rem;
         letter-spacing: 0.5px;
     }
+    
     .footer-content {
         flex-direction: column;
         gap: 15px;
@@ -450,10 +466,18 @@ body::before {
 
 /* Ajuste fino para telas mobile muito pequenas (ex: iPhone SE, antigos) */
 @media (max-width: 380px) {
-    .compact-grid {
+    .hero-section {
+        grid-template-columns: 55% 40%;
+    }
+    .brand-title {
+        font-size: 1.5rem;
+    }
+    .compact-grid,
+    #plataformas .grid-container {
         grid-template-columns: repeat(3, 1fr);
     }
-    .compact-grid .grid-card span {
+    .compact-grid .grid-card span,
+    #plataformas .grid-card span {
         font-size: 0.6rem;
     }
 }
