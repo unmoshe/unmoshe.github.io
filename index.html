@@ -76,7 +76,7 @@
             }
             .about-text {
                 font-size: 0.95rem; 
-                text-align: left; 
+                text-align: justify; /* Correção: Alterado de left para justify no mobile */
                 line-height: 1.8;
             }
         }
@@ -216,18 +216,16 @@
                     <span class="subtitle">Autodidata e polímata</span>
                 </div>
             </div>
-            <!-- Atualizado para chamar o script Javascript -->
             <nav class="nav-links">
-                <a href="#inicio" onclick="mudarPagina('inicio', this)" class="nav-btn active">Início</a>
-                <a href="#sobre" onclick="mudarPagina('sobre', this)" class="nav-btn">Sobre mim</a>
-                <a href="#ebooks" onclick="mudarPagina('ebooks', this)" class="nav-btn">Ebooks</a>
+                <a href="#inicio" onclick="mudarPagina(event, 'inicio', this)" class="nav-btn active">Início</a>
+                <a href="#sobre" onclick="mudarPagina(event, 'sobre', this)" class="nav-btn">Sobre mim</a>
+                <a href="#ebooks" onclick="mudarPagina(event, 'ebooks', this)" class="nav-btn">Ebooks</a>
             </nav>
         </div>
     </header>
 
     <main class="main-container">
         
-        <!-- ABA: INÍCIO -->
         <div id="inicio" class="secao-pagina secao-ativa">
             <section class="hero-section fade-in">
                 <div class="hero-text-area">
@@ -344,7 +342,6 @@
             </section>
         </div>
 
-        <!-- ABA: SOBRE MIM -->
         <div id="sobre" class="secao-pagina">
             <section class="about-container fade-in">
                 <h1 class="about-title">Sobre Mim</h1>
@@ -383,7 +380,6 @@
             </section>
         </div>
 
-        <!-- ABA: EBOOKS -->
         <div id="ebooks" class="secao-pagina">
             <section class="ebooks-header fade-in" style="margin-bottom: 60px; margin-top: 20px;">
                 <h1 class="brand-title" style="text-align: center; font-size: 4rem; margin-bottom: 20px;">EBOOKS</h1>
@@ -440,9 +436,12 @@
         </div>
     </footer>
 
-    <!-- SCRIPT DE NAVEGAÇÃO SPA -->
     <script>
-        function mudarPagina(idPagina, elementoClicado) {
+        // Correção: Adicionado 'event' como parâmetro para impedir o comportamento nativo
+        function mudarPagina(event, idPagina, elementoClicado) {
+            // Previne o "pulo" instantâneo que a tag <a> com href="#" ou "#id" causa
+            event.preventDefault(); 
+            
             // 1. Esconde todas as seções principais
             let secoes = document.querySelectorAll('.secao-pagina');
             secoes.forEach(secao => {
@@ -458,10 +457,10 @@
                 link.classList.remove('active');
             });
 
-            // 4. Adiciona a classe 'active' apenas no link que foi clicado (a linha verde de destaque)
+            // 4. Adiciona a classe 'active' apenas no link que foi clicado
             elementoClicado.classList.add('active');
             
-            // 5. Rola suavemente para o topo ao trocar de aba (opcional, mas bom pra UX)
+            // 5. Rola suavemente para o topo ao trocar de aba sem conflitos
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
