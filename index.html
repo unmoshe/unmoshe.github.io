@@ -9,7 +9,201 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ==========================================================================
+           Estilos para a SPA (Single Page Application)
+           ========================================================================== */
+        .secao-pagina {
+            display: none; /* Esconde as abas que não estão ativas */
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .secao-ativa {
+            display: block; /* Mostra apenas a aba ativa */
+        }
+
+        /* ==========================================================================
+           Estilos da Página Sobre
+           ========================================================================== */
+        .about-container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 20px 20px 80px 20px;
+        }
+
+        .about-title {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            color: var(--text-pure);
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .about-text {
+            font-family: var(--font-body);
+            font-size: 1.05rem; 
+            color: var(--text-muted);
+            line-height: 1.9;
+            margin-bottom: 25px;
+            text-align: justify;
+            font-weight: 300;
+        }
+
+        .about-text strong {
+            color: var(--text-pure);
+            font-weight: 700;
+        }
+
+        .about-quote {
+            border-left: 2px solid var(--text-pure);
+            padding-left: 20px;
+            margin: 40px 0;
+            font-style: italic;
+            color: var(--text-pure);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .about-title {
+                font-size: 2.8rem;
+                margin-bottom: 30px;
+            }
+            .about-text {
+                font-size: 0.95rem; 
+                text-align: left; 
+                line-height: 1.8;
+            }
+        }
+
+        /* ==========================================================================
+           Estilos da Página Ebooks
+           ========================================================================== */
+        .ebook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .ebook-card {
+            background: linear-gradient(145deg, #0a0a0a, #050505);
+            border: 1px solid #1a1a1a;
+            border-bottom: 3px solid var(--border-accent);
+            border-radius: 8px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .ebook-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.08);
+            border-bottom-color: #cccccc;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .ebook-cover-wrapper {
+            width: 100%;
+            overflow: hidden;
+            border-bottom: 1px solid #1a1a1a;
+            background-color: #111;
+        }
+
+        .ebook-cover {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 2 / 3;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .ebook-card:hover .ebook-cover {
+            transform: scale(1.06);
+        }
+
+        .ebook-info {
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .ebook-title {
+            font-family: var(--font-heading);
+            color: var(--text-pure);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            line-height: 1.3;
+        }
+
+        .ebook-action {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            align-self: flex-start;
+            position: relative;
+            padding-bottom: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .ebook-action::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--text-pure);
+            transition: width 0.3s ease;
+        }
+
+        .ebook-card:hover .ebook-action {
+            color: var(--text-pure);
+        }
+
+        .ebook-card:hover .ebook-action::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .ebook-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 20px;
+            }
+            .ebook-info {
+                padding: 20px 15px;
+            }
+            .ebook-title {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .ebook-grid {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -22,131 +216,218 @@
                     <span class="subtitle">Autodidata e polímata</span>
                 </div>
             </div>
+            <!-- Atualizado para chamar o script Javascript -->
             <nav class="nav-links">
-                <a href="index.html" class="active">Início</a>
-                <a href="sobre.html">Sobre mim</a>
-                <a href="ebooks.html">Ebooks</a>
+                <a href="#inicio" onclick="mudarPagina('inicio', this)" class="nav-btn active">Início</a>
+                <a href="#sobre" onclick="mudarPagina('sobre', this)" class="nav-btn">Sobre mim</a>
+                <a href="#ebooks" onclick="mudarPagina('ebooks', this)" class="nav-btn">Ebooks</a>
             </nav>
         </div>
     </header>
 
     <main class="main-container">
         
-        <section class="hero-section fade-in">
-            <div class="hero-text-area">
-                <h1 class="brand-title">unmoshe</h1>
-                <p class="bio-text">Autodidata e polímata.</p>
-                <div class="hero-divider"></div>
-            </div>
-            <div class="hero-avatar-area">
-                <img src="profile.jpg" alt="unmoshe" class="profile-pic">
-            </div>
-        </section>
+        <!-- ABA: INÍCIO -->
+        <div id="inicio" class="secao-pagina secao-ativa">
+            <section class="hero-section fade-in">
+                <div class="hero-text-area">
+                    <h1 class="brand-title">unmoshe</h1>
+                    <p class="bio-text">Autodidata e polímata.</p>
+                    <div class="hero-divider"></div>
+                </div>
+                <div class="hero-avatar-area">
+                    <img src="profile.jpg" alt="unmoshe" class="profile-pic">
+                </div>
+            </section>
 
-        <!-- Botão "Sobre mim" removido -->
+            <section id="projetos" class="content-section fade-in">
+                <div class="grid-container">
+                    <a class="grid-card" href="https://instagram.com/somostodosateus" target="_blank" style="--i:1">
+                        <img src="icons/sta.png" alt="StA" class="favicon">
+                        <span>StA</span>
+                    </a>
+                    <a class="grid-card" href="https://instagram.com/subsoloalternativo" target="_blank" style="--i:2">
+                        <img src="icons/subalt.png" alt="SubAlt" class="favicon">
+                        <span>Subsolo Alternativo</span>
+                    </a>
+                    <a class="grid-card" href="https://instagram.com/antideprimemes/" target="_blank" style="--i:3">
+                        <img src="icons/antideprimemes.png" alt="FVolga" class="favicon">
+                        <span>Antideprimemes</span>
+                    </a>
+                    <a class="grid-card" href="https://youtube.com/@tapadosfatos/" target="_blank" style="--i:4">
+                        <img src="icons/tdf.jpeg" alt="OpKrem" class="favicon">
+                        <span>Tapa dos Fatos</span>
+                    </a>
+                </div>
+            </section>
 
-        <section id="projetos" class="content-section fade-in">
-            <div class="grid-container">
-                <a class="grid-card" href="https://instagram.com/somostodosateus" target="_blank" style="--i:1">
-                    <img src="icons/sta.png" alt="StA" class="favicon">
-                    <span>StA</span>
-                </a>
-                <a class="grid-card" href="https://instagram.com/subsoloalternativo" target="_blank" style="--i:2">
-                    <img src="icons/subalt.png" alt="SubAlt" class="favicon">
-                    <span>Subsolo Alternativo</span>
-                </a>
-                <a class="grid-card" href="https://instagram.com/antideprimemes/" target="_blank" style="--i:3">
-                    <img src="icons/antideprimemes.png" alt="FVolga" class="favicon">
-                    <span>Antideprimemes</span>
-                </a>
-                <a class="grid-card" href="https://youtube.com/@tapadosfatos/" target="_blank" style="--i:4">
-                    <img src="icons/tdf.jpeg" alt="OpKrem" class="favicon">
-                    <span>Tapa dos Fatos</span>
-                </a>
-            </div>
-        </section>
+            <section id="conexoes" class="content-section fade-in">
+                <div class="grid-container compact-grid">
+                    <a class="grid-card" href="https://instagram.com/unmoshe" target="_blank" style="--i:1">
+                        <img src="https://www.google.com/s2/favicons?domain=instagram.com&sz=128" alt="Instagram" class="favicon">
+                        <span>Instagram</span>
+                    </a>
+                    <a class="grid-card" href="https://www.facebook.com/unmoshe/" target="_blank" style="--i:2">
+                        <img src="https://www.google.com/s2/favicons?domain=facebook.com&sz=128" alt="Facebook" class="favicon">
+                        <span>Facebook</span>
+                    </a>
+                    <a class="grid-card" href="https://discord.com/users/293465168526966784" target="_blank" style="--i:3">
+                        <img src="https://www.google.com/s2/favicons?domain=discord.com&sz=128" alt="Discord" class="favicon">
+                        <span>Discord</span>
+                    </a>
+                    <a class="grid-card" href="https://open.spotify.com/user/31jpghiqdhnw5v22d7j3t4ru7qta?si=8f0lDKEtR5yuQgqcTED27Q" target="_blank" style="--i:4">
+                        <img src="https://www.google.com/s2/favicons?domain=spotify.com&sz=128" alt="Spotify" class="favicon">
+                        <span>Spotify</span>
+                    </a>
+                    <a class="grid-card" href="https://www.reddit.com/user/unmoshe/" target="_blank" style="--i:5">
+                        <img src="https://www.google.com/s2/favicons?domain=reddit.com&sz=128" alt="Reddit" class="favicon">
+                        <span>Reddit</span>
+                    </a>
+                    <a class="grid-card" href="https://youtube.com/@unmoshe" target="_blank" style="--i:6">
+                        <img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=128" alt="YouTube" class="favicon">
+                        <span>YouTube</span>
+                    </a>
+                    <a class="grid-card" href="https://t.me/unmoshe" target="_blank" style="--i:7">
+                        <img src="https://www.google.com/s2/favicons?domain=t.me&sz=128" alt="Telegram" class="favicon">
+                        <span>Telegram</span>
+                    </a>
+                    <a class="grid-card" href="https://www.twitch.tv/unmoshe" target="_blank" style="--i:8">
+                        <img src="https://www.google.com/s2/favicons?domain=twitch.tv&sz=128" alt="Twitch" class="favicon">
+                        <span>Twitch</span>
+                    </a>
+                    <a class="grid-card" href="https://vk.com/unmoshe" target="_blank" style="--i:9">
+                        <img src="https://www.google.com/s2/favicons?domain=vk.com&sz=128" alt="VKontakte" class="favicon">
+                        <span>VKontakte</span>
+                    </a>
+                    <a class="grid-card" href="https://boxd.it/kig67" target="_blank" style="--i:10">
+                        <img src="https://www.google.com/s2/favicons?domain=boxd.it&sz=128" alt="Letterboxd" class="favicon">
+                        <span>Letterboxd</span>
+                    </a>
+                    <a class="grid-card" href="https://www.behance.net/unmoshe" target="_blank" style="--i:11">
+                        <img src="https://www.google.com/s2/favicons?domain=behance.net&sz=128" alt="Behance" class="favicon">
+                        <span>Behance</span>
+                    </a>
+                    <a class="grid-card" href="https://soundcloud.com/unmoshe" target="_blank" style="--i:12">
+                        <img src="https://www.google.com/s2/favicons?domain=soundcloud.com&sz=128" alt="Soundcloud" class="favicon">
+                        <span>Soundcloud</span>
+                    </a>
+                </div>
+            </section>
 
-        <section id="conexoes" class="content-section fade-in">
-            <div class="grid-container compact-grid">
-                <a class="grid-card" href="https://instagram.com/unmoshe" target="_blank" style="--i:1">
-                    <img src="https://www.google.com/s2/favicons?domain=instagram.com&sz=128" alt="Instagram" class="favicon">
-                    <span>Instagram</span>
-                </a>
-                <a class="grid-card" href="https://www.facebook.com/unmoshe/" target="_blank" style="--i:2">
-                    <img src="https://www.google.com/s2/favicons?domain=facebook.com&sz=128" alt="Facebook" class="favicon">
-                    <span>Facebook</span>
-                </a>
-                <a class="grid-card" href="https://discord.com/users/293465168526966784" target="_blank" style="--i:3">
-                    <img src="https://www.google.com/s2/favicons?domain=discord.com&sz=128" alt="Discord" class="favicon">
-                    <span>Discord</span>
-                </a>
-                <a class="grid-card" href="https://open.spotify.com/user/31jpghiqdhnw5v22d7j3t4ru7qta?si=8f0lDKEtR5yuQgqcTED27Q" target="_blank" style="--i:4">
-                    <img src="https://www.google.com/s2/favicons?domain=spotify.com&sz=128" alt="Spotify" class="favicon">
-                    <span>Spotify</span>
-                </a>
-                <a class="grid-card" href="https://www.reddit.com/user/unmoshe/" target="_blank" style="--i:5">
-                    <img src="https://www.google.com/s2/favicons?domain=reddit.com&sz=128" alt="Reddit" class="favicon">
-                    <span>Reddit</span>
-                </a>
-                <a class="grid-card" href="https://youtube.com/@unmoshe" target="_blank" style="--i:6">
-                    <img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=128" alt="YouTube" class="favicon">
-                    <span>YouTube</span>
-                </a>
-                <a class="grid-card" href="https://t.me/unmoshe" target="_blank" style="--i:7">
-                    <img src="https://www.google.com/s2/favicons?domain=t.me&sz=128" alt="Telegram" class="favicon">
-                    <span>Telegram</span>
-                </a>
-                <a class="grid-card" href="https://www.twitch.tv/unmoshe" target="_blank" style="--i:8">
-                    <img src="https://www.google.com/s2/favicons?domain=twitch.tv&sz=128" alt="Twitch" class="favicon">
-                    <span>Twitch</span>
-                </a>
-                <a class="grid-card" href="https://vk.com/unmoshe" target="_blank" style="--i:9">
-                    <img src="https://www.google.com/s2/favicons?domain=vk.com&sz=128" alt="VKontakte" class="favicon">
-                    <span>VKontakte</span>
-                </a>
-                <a class="grid-card" href="https://boxd.it/kig67" target="_blank" style="--i:10">
-                    <img src="https://www.google.com/s2/favicons?domain=boxd.it&sz=128" alt="Letterboxd" class="favicon">
-                    <span>Letterboxd</span>
-                </a>
-                <a class="grid-card" href="https://www.behance.net/unmoshe" target="_blank" style="--i:11">
-                    <img src="https://www.google.com/s2/favicons?domain=behance.net&sz=128" alt="Behance" class="favicon">
-                    <span>Behance</span>
-                </a>
-                <a class="grid-card" href="https://soundcloud.com/unmoshe" target="_blank" style="--i:12">
-                    <img src="https://www.google.com/s2/favicons?domain=soundcloud.com&sz=128" alt="Soundcloud" class="favicon">
-                    <span>Soundcloud</span>
-                </a>
-            </div>
-        </section>
+            <section id="plataformas" class="content-section fade-in">
+                <div class="grid-container">
+                    <a class="grid-card" href="https://steamcommunity.com/id/unmoshe" target="_blank" style="--i:1">
+                        <img src="https://www.google.com/s2/favicons?domain=steamcommunity.com&sz=128" alt="Steam" class="favicon">
+                        <span>Steam</span>
+                    </a>
+                    <a class="grid-card" href="https://chess.com/member/GM_unmoshe" target="_blank" style="--i:2">
+                        <img src="https://www.google.com/s2/favicons?domain=chess.com&sz=128" alt="Chess.com" class="favicon">
+                        <span>Chess.com</span>
+                    </a>
+                    <a class="grid-card" href="https://lichess.org/@/unmoshe" target="_blank" style="--i:3">
+                        <img src="https://www.google.com/s2/favicons?domain=lichess.org&sz=128" alt="Lichess" class="favicon">
+                        <span>Lichess</span>
+                    </a>
+                    <a class="grid-card" href="https://roblox.com/pt/users/10960589649/profile" target="_blank" style="--i:4">
+                        <img src="https://www.google.com/s2/favicons?domain=roblox.com&sz=128" alt="Roblox" class="favicon">
+                        <span>Roblox</span>
+                    </a>
+                    <a class="grid-card" href="https://xbox.com/pt-BR/play/user/Moshe2695" target="_blank" style="--i:5">
+                        <img src="https://www.google.com/s2/favicons?domain=xbox.com&sz=128" alt="Xbox" class="favicon">
+                        <span>Xbox</span>
+                    </a>
+                    <a class="grid-card" href="https://profile.playstation.com/unmoshe" target="_blank" style="--i:6">
+                        <img src="https://www.google.com/s2/favicons?domain=playstation.com&sz=128" alt="PlayStation" class="favicon">
+                        <span>PlayStation</span>
+                    </a>
+                </div>
+            </section>
+        </div>
 
-        <section id="plataformas" class="content-section fade-in">
-            <div class="grid-container">
-                <a class="grid-card" href="https://steamcommunity.com/id/unmoshe" target="_blank" style="--i:1">
-                    <img src="https://www.google.com/s2/favicons?domain=steamcommunity.com&sz=128" alt="Steam" class="favicon">
-                    <span>Steam</span>
-                </a>
-                <a class="grid-card" href="https://chess.com/member/GM_unmoshe" target="_blank" style="--i:2">
-                    <img src="https://www.google.com/s2/favicons?domain=chess.com&sz=128" alt="Chess.com" class="favicon">
-                    <span>Chess.com</span>
-                </a>
-                <a class="grid-card" href="https://lichess.org/@/unmoshe" target="_blank" style="--i:3">
-                    <img src="https://www.google.com/s2/favicons?domain=lichess.org&sz=128" alt="Lichess" class="favicon">
-                    <span>Lichess</span>
-                </a>
-                <a class="grid-card" href="https://roblox.com/pt/users/10960589649/profile" target="_blank" style="--i:4">
-                    <img src="https://www.google.com/s2/favicons?domain=roblox.com&sz=128" alt="Roblox" class="favicon">
-                    <span>Roblox</span>
-                </a>
-                <a class="grid-card" href="https://xbox.com/pt-BR/play/user/Moshe2695" target="_blank" style="--i:5">
-                    <img src="https://www.google.com/s2/favicons?domain=xbox.com&sz=128" alt="Xbox" class="favicon">
-                    <span>Xbox</span>
-                </a>
-                <a class="grid-card" href="https://profile.playstation.com/unmoshe" target="_blank" style="--i:6">
-                    <img src="https://www.google.com/s2/favicons?domain=playstation.com&sz=128" alt="PlayStation" class="favicon">
-                    <span>PlayStation</span>
-                </a>
-            </div>
-        </section>
+        <!-- ABA: SOBRE MIM -->
+        <div id="sobre" class="secao-pagina">
+            <section class="about-container fade-in">
+                <h1 class="about-title">Sobre Mim</h1>
+    
+                <p class="about-text">
+                    Na minha bio diz "Autodidata e polímata". Em bom português: eu tenho uma certa alergia ao tédio e aprendo sozinho o que me dá na telha. Meus projetos e designs são invariavelmente criados usando temas dark, sempre com fundo preto. E antes que você pergunte, não, não é porque eu sou um rockeiro revoltado com a sociedade. É simplesmente porque preto é a minha cor favorita.
+                </p>
+    
+                <p class="about-text">
+                    Tenho um interesse bem particular por armas e táticas militares, bem como sou fascinado pelo universo <strong>007</strong>. Apesar disso sou um cara tranquilo. Tão tranquilo que fisicamente eu não tenho medo de absolutamente nada. O meu único e verdadeiro terror? É não viver a vida que eu secretamente idealizo na minha cabeça. O que é exatamente? Bom, isso só eu e Deus sabemos.
+                </p>
+    
+                <p class="about-text">
+                    E falando Nele: sou um ateu com nome cristão e prestes a mudar para um nome judeu. Confuso? Um pouco. Mas isso não significa que eu seja uma pessoa ruim como a maioria gosta de deduzir sobre quem não acredita em alguém que não tem corpo físico e não dá sinal de vida. Eu adoro uma boa bebida alcoólica para acompanhar a vida, mas calma lá, não sou alcoólatra. Sou apenas um entusiasta focado nos pequenos prazeres.
+                </p>
+    
+                <div class="about-quote">
+                    "Minha verdadeira paixão está nos anos 80. Meu gosto musical é uma viagem direta pra essa década: new wave, rock, metal e post-punk. Se tiver um sintetizador deprê, eu tô dando play."
+                </div>
+    
+                <p class="about-text">
+                    No cinema, eu exijo um pouco mais de capricho. Gosto de filmes realistas que tenham um bom <em>gore</em> (se for de ação ou terror), e sou fã de um bom terror psicológico que te faz duvidar da própria sanidade. Agora, se for pra assistir um drama, precisa ter uma sacada intelectual extremamente afiada, daquelas que as pessoas comuns não entenderiam. Sim, sou um pouco pedante com roteiros. Caso não tenha violência explícita ou crítica altamente intelectual, que pelo menos seja algo insano e meio megalomaníaco.
+                </p>
+    
+                <p class="about-text">
+                    Para balancear esse intelecto todo, minha rotina básica inclui assistir a alguém ser desmaiado no <strong>UFC</strong> e acompanhar futebol. Também assisto a vários vídeos de viagens. E quando estou em um estado de espírito completamente zen e despreocupado com o mundo? Eu simplesmente ligo a televisão e fico assistindo a partidas de tênis. 
+                </p>
+    
+                <p class="about-text">
+                    Ah, eu adoro animais. Exceto cobras. Cobras podem ficar bem longe de mim. Também odeio insetos no geral, mas tenho uma estranha mania: adoro observar formigas e aranhas trabalhando. Elas sempre foram o meu entretenimento natural desde criança. Fico lá, olhando, e evito ao máximo matá-las. Deixo elas pagarem o aluguel com o trabalho braçal.
+                </p>
+    
+                <p class="about-text" style="margin-top: 40px; text-align: center; border-top: 1px solid #1a1a1a; padding-top: 40px;">
+                    <strong>No fim das contas, sou um cara reservado.</strong><br><br> Tudo o que você acabou de ler é a amostra grátis. O resto da minha vida ou é privado demais para a internet, ou você vai ter que ler algum dos meus ebooks para descobrir os detalhes. Vai lá na aba "Ebooks", escolhe o seu veneno e me ajuda a financiar a minha vida secretamente idealizada.
+                </p>
+            </section>
+        </div>
+
+        <!-- ABA: EBOOKS -->
+        <div id="ebooks" class="secao-pagina">
+            <section class="ebooks-header fade-in" style="margin-bottom: 60px; margin-top: 20px;">
+                <h1 class="brand-title" style="text-align: center; font-size: 4rem; margin-bottom: 20px;">EBOOKS</h1>
+                <p style="text-align: center; max-width: 650px; margin: 0 auto; color: var(--text-muted); font-size: 1.15rem; line-height: 1.8; font-style: italic;">
+                    Livros que escrevi em momentos de tédio e momentos de inspiração; usei meu networking como banca examinadora antes de publicá-los. Boa leitura.
+                </p>
+            </section>
+    
+            <section class="content-section fade-in">
+                <div class="ebook-grid">
+                    
+                    <a href="https://pay.kiwify.com.br/kEiuOHZ" target="_blank" class="ebook-card">
+                        <div class="ebook-cover-wrapper">
+                            <img src="https://aws-assets.kiwify.com.br/cdn-cgi/image/fit=scale-down,width=600/iWRlDEE5hlcksuA/1000070140_11bc59454a65445995425be2743da2f8.png" alt="Capa do Ebook 1" class="ebook-cover">
+                        </div>
+                        <div class="ebook-info">
+                            <h3 class="ebook-title">Amém pra quem?</h3>
+                            <span class="ebook-action">Ver na Kiwify <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>
+    
+                    <a href="https://pay.kiwify.com.br/MNQVMaU" target="_blank" class="ebook-card">
+                        <div class="ebook-cover-wrapper">
+                            <img src="https://aws-assets.kiwify.com.br/cdn-cgi/image/fit=scale-down,width=600/iWRlDEE5hlcksuA/1000062020_82e5825cb82841d48d4abdbf362d3778.jpg" alt="Capa do Ebook 2" class="ebook-cover">
+                        </div>
+                        <div class="ebook-info">
+                            <h3 class="ebook-title">Como debater com crente</h3>
+                            <span class="ebook-action">Ver na Kiwify <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>
+    
+                    <a href="https://pay.kiwify.com.br/16qYa6D" target="_blank" class="ebook-card">
+                        <div class="ebook-cover-wrapper">
+                            <img src="https://aws-assets.kiwify.com.br/cdn-cgi/image/fit=scale-down,width=600/iWRlDEE5hlcksuA/1000064954_830156b1cade43baa241bb68e753e820.jpg" alt="Capa do Ebook 3" class="ebook-cover">
+                        </div>
+                        <div class="ebook-info">
+                            <h3 class="ebook-title">Deus realmente existe?</h3>
+                            <span class="ebook-action">Ver na Kiwify <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>
+    
+                </div>
+            </section>
+        </div>
 
     </main>
 
@@ -158,6 +439,32 @@
             </a>
         </div>
     </footer>
+
+    <!-- SCRIPT DE NAVEGAÇÃO SPA -->
+    <script>
+        function mudarPagina(idPagina, elementoClicado) {
+            // 1. Esconde todas as seções principais
+            let secoes = document.querySelectorAll('.secao-pagina');
+            secoes.forEach(secao => {
+                secao.classList.remove('secao-ativa');
+            });
+            
+            // 2. Mostra a seção clicada
+            document.getElementById(idPagina).classList.add('secao-ativa');
+
+            // 3. Remove a classe 'active' de todos os links do menu
+            let links = document.querySelectorAll('.nav-btn');
+            links.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // 4. Adiciona a classe 'active' apenas no link que foi clicado (a linha verde de destaque)
+            elementoClicado.classList.add('active');
+            
+            // 5. Rola suavemente para o topo ao trocar de aba (opcional, mas bom pra UX)
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 
 </body>
 </html>
