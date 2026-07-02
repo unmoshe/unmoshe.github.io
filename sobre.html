@@ -7,20 +7,71 @@
 
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-    <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Oswald:wght@400;500;700&display=swap"
         rel="stylesheet"
     />
 
-    <!-- Font Awesome (ícones para os rabiscos) -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
 
-    <!-- CSS principal -->
     <link rel="stylesheet" href="style.css" />
+
+    <style>
+        .about-container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 20px 20px 80px 20px;
+        }
+
+        .about-title {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            color: var(--text-pure);
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .about-text {
+            font-family: var(--font-body);
+            font-size: 1.05rem; /* Fonte pequena, mas legível */
+            color: var(--text-muted);
+            line-height: 1.9;
+            margin-bottom: 25px;
+            text-align: justify;
+            font-weight: 300;
+        }
+
+        .about-text strong {
+            color: var(--text-pure);
+            font-weight: 700;
+        }
+
+        .about-quote {
+            border-left: 2px solid var(--text-pure);
+            padding-left: 20px;
+            margin: 40px 0;
+            font-style: italic;
+            color: var(--text-pure);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .about-title {
+                font-size: 2.8rem;
+                margin-bottom: 30px;
+            }
+            .about-text {
+                font-size: 0.95rem; /* Ajuste sutil para leitura em telas pequenas */
+                text-align: left; /* Facilita a leitura no mobile */
+                line-height: 1.8;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -43,55 +94,42 @@
 
     <main class="main-container">
         
-<!-- Conteúdo com estilo de caderno/rabiscos -->
-        <section class="content-section" style="margin-bottom: 40px;">
-            <div class="about-wrapper notebook-bg sketch-border fade-in">
-                <!-- 1º parágrafo: lápis -->
-                <div class="note-paragraph">
-                    <i class="fas fa-pencil-alt note-icon"></i>
-                    <p class="note-text about-paragraph">
-                        Na minha bio diz "Autodidata e polímata". Em bom português: eu tenho uma certa alergia ao tédio e aprendo sozinho o que me dá na telha. A tecnologia é o meu quintal, mas isso não significa que eu vou hackear o wifi do seu vizinho se você pedir. Eu tenho um interesse bem particular por <strong>segurança, táticas e armamento</strong> — o que soa exatamente como a descrição de um vilão do James Bond, mas prometo que sou um cara tranquilo. Pelo menos na maior parte do tempo.
-                    </p>
-                </div>
+        <section class="about-container fade-in">
+            <h1 class="about-title">Sobre Mim</h1>
 
-                <!-- 2º parágrafo: comentário / rage bait -->
-                <div class="note-paragraph">
-                    <i class="fas fa-comment note-icon"></i>
-                    <p class="note-text about-paragraph">
-                        Aliás, se você caiu de paraquedas aqui porque leu algum comentário meu, discordou ferozmente e veio babando de ódio para fuçar meu perfil: parabéns, você provavelmente caiu no meu <em>ragebait</em>. Quando estou entediado, gosto de jogar a isca. Sinceramente? Eu acho uma atitude imbecil discutir com desconhecidos na internet por causa de problemas que jamais serão resolvidos em uma caixa de comentários de rede social. Então guarda o rancor aí, não me odeie, foi só pela zoeira e você foi a vítima da vez.
-                    </p>
-                </div>
+            <p class="about-text">
+                Na minha bio diz "Autodidata e polímata". Em bom português: eu tenho uma certa alergia ao tédio e aprendo sozinho o que me dá na telha. Meus projetos e designs são invariavelmente criados usando temas dark, sempre com fundo preto. E antes que você pergunte, não, não é porque eu sou um rockeiro revoltado com a sociedade. É simplesmente porque preto é a minha cor favorita.
+            </p>
 
-                <!-- 3º parágrafo: música -->
-                <div class="note-paragraph">
-                    <i class="fas fa-music note-icon"></i>
-                    <p class="note-text about-paragraph">
-                        Minha paz de espírito (quando não estou botando fogo em seções de comentários) é mantida por um equilíbrio muito frágil entre assistir a alguém ser desmaiado no <strong>UFC</strong>, sofrer incondicionalmente pelo Corinthians e ouvir música num volume questionável. Meu gosto musical é uma salada seleta: vai do hard rock, indie, glam rock e metal até aquela vibe new wave deliciosa — Depeche Mode, Pet Shop Boys, New Order, Yazoo... se tem um sintetizador deprê ou uma guitarra distorcida, eu tô no play.
-                    </p>
-                </div>
+            <p class="about-text">
+                Tenho um interesse bem particular por armas e táticas militares, bem como sou fascinado pelo universo <strong>007</strong>. Apesar disso sou um cara tranquilo. Tão tranquilo que fisicamente eu não tenho medo de absolutamente nada. O meu único e verdadeiro terror? É não viver a vida que eu secretamente idealizo na minha cabeça. O que é exatamente? Bom, isso só eu e Deus sabemos.
+            </p>
 
-                <!-- 4º parágrafo: jogos -->
-                <div class="note-paragraph">
-                    <i class="fas fa-gamepad note-icon"></i>
-                    <p class="note-text about-paragraph">
-                        No mundo digital, você me acha na Steam suando sangue no <strong>CS2</strong>. São quase 600 horas de jogo para eu continuar morrendo pra quem tem ping alto. Também bato ponto em clássicos de respeito, como Resident Evil 4 e Battlefield. E se você por acaso se acha o Kasparov reencarnado, pode tentar a sorte contra o "GM_unmoshe" no Chess.com. Meu rating de Blitz bate na casa dos 1300 — o suficiente para amassar a galera do churrasco, mas ruim o bastante pra eu culpar o mouse quando perco a rainha de graça.
-                    </p>
-                </div>
+            <p class="about-text">
+                E falando Nele: sou um ateu com nome cristão e prestes a mudar para um nome judeu. Confuso? Um pouco. Mas isso não significa que eu seja uma pessoa ruim como a maioria gosta de deduzir sobre quem não acredita em alguém que não tem corpo físico e não dá sinal de vida. Eu adoro uma boa bebida alcoólica para acompanhar a vida, mas calma lá, não sou alcoólatra. Sou apenas um entusiasta focado nos pequenos prazeres.
+            </p>
 
-                <!-- 5º parágrafo: mistério / reservado -->
-                <div class="note-paragraph">
-                    <i class="fas fa-user-secret note-icon"></i>
-                    <p class="note-text about-paragraph">
-                        No fim das contas, sou um cara reservado. E esse texto aqui é todo o "molho" que você vai receber de graça hoje. O resto do mistério você vai ter que ser interessante o suficiente para descobrir.
-                    </p>
-                </div>
-
-                <!-- Disclaimer (sem ícone, centralizado) -->
-                <p class="about-paragraph" style="font-style: italic; font-size: 0.9rem; text-align: center; margin-top: 40px;">
-                    * Disclaimer: Posso conter traços de ironia e sarcasmo (e se você não sabe a diferença, ótimo, eu também finjo que sei).
-                </p>
+            <div class="about-quote">
+                "Minha verdadeira paixão está nos anos 80. Meu gosto musical é uma viagem direta pra essa década: new wave, rock, metal e post-punk. Se tiver um sintetizador deprê, eu tô dando play."
             </div>
+
+            <p class="about-text">
+                No cinema, eu exijo um pouco mais de capricho. Gosto de filmes realistas que tenham um bom <em>gore</em> (se for de ação ou terror), e sou fã de um bom terror psicológico que te faz duvidar da própria sanidade. Agora, se for pra assistir um drama, precisa ter uma sacada intelectual extremamente afiada, daquelas que as pessoas comuns não entenderiam. Sim, sou um pouco pedante com roteiros. Caso não tenha violência explícita ou crítica altamente intelectual, que pelo menos seja algo insano e meio megalomaníaco.
+            </p>
+
+            <p class="about-text">
+                Para balancear esse intelecto todo, minha rotina básica inclui assistir a alguém ser desmaiado no <strong>UFC</strong> e acompanhar futebol. Também assisto a vários vídeos de viagens. E quando estou em um estado de espírito completamente zen e despreocupado com o mundo? Eu simplesmente ligo a televisão e fico assistindo a partidas de tênis. 
+            </p>
+
+            <p class="about-text">
+                Ah, eu adoro animais. Exceto cobras. Cobras podem ficar bem longe de mim. Também odeio insetos no geral, mas tenho uma estranha mania: adoro observar formigas e aranhas trabalhando. Elas sempre foram o meu entretenimento natural desde criança. Fico lá, olhando, e evito ao máximo matá-las. Deixo elas pagarem o aluguel com o trabalho braçal.
+            </p>
+
+            <p class="about-text" style="margin-top: 40px; text-align: center; border-top: 1px solid #1a1a1a; padding-top: 40px;">
+                <strong>No fim das contas, sou um cara reservado.</strong><br><br> Tudo o que você acabou de ler é a amostra grátis. O resto da minha vida ou é privado demais para a internet, ou você vai ter que ler algum dos meus ebooks para descobrir os detalhes. Vai lá na aba "Ebooks", escolhe o seu veneno e me ajuda a financiar a minha vida secretamente idealizada.
+            </p>
         </section>
+
     </main>
 
     <footer class="site-footer">
