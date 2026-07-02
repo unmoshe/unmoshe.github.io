@@ -14,6 +14,15 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
+
+body {
+    -webkit-user-select: none;   /* Safari e iOS Mobile */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;           /* Chrome, Opera e Edge */
+    -webkit-touch-callout: none; /* Bloqueia o menu de toque longo no iOS/Android (Mobile) */
+}
+
         /* ==========================================================================
            Estilos para a SPA (Single Page Application)
            ========================================================================== */
@@ -437,6 +446,32 @@
     </footer>
 
     <script>
+
+// 1. Bloqueia o menu de clique direito (Desktop) e clique longo (Mobile)
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// 2. Bloqueia o evento nativo de cópia
+document.addEventListener('copy', event => event.preventDefault());
+
+// 3. Bloqueia o arrastamento de imagens e links
+document.addEventListener('dragstart', event => event.preventDefault());
+
+// 4. Bloqueia atalhos do teclado (Ctrl+C, Ctrl+A, Ctrl+U, Ctrl+S e F12)
+document.addEventListener('keydown', event => {
+    // Detecta se a tecla Ctrl (ou Cmd no Mac) está pressionada junto com C, A, U ou S
+    const ctrlOuCmd = event.ctrlKey || event.metaKey;
+    const teclasProibidas = ['c', 'C', 'a', 'A', 'u', 'U', 's', 'S'];
+
+    if (ctrlOuCmd && teclasProibidas.includes(event.key)) {
+        event.preventDefault();
+    }
+
+    // Bloqueia a tecla F12 (Inspecionar elemento)
+    if (event.key === 'F12') {
+        event.preventDefault();
+    }
+});
+
         // Correção: Adicionado 'event' como parâmetro para impedir o comportamento nativo
         function mudarPagina(event, idPagina, elementoClicado) {
             // Previne o "pulo" instantâneo que a tag <a> com href="#" ou "#id" causa
