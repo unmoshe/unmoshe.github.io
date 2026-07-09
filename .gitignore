@@ -1,4 +1,4 @@
 .env
 *.log
 config.json
-git-auto-push.sh
+update.sh
