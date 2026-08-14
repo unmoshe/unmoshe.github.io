@@ -11,32 +11,286 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
-    <link rel="stylesheet" href="style.css">
-
     <style>
+        /* ==========================================================================
+           Configurações Base e Identidade Visual (Tema Dark Premium)
+           ========================================================================== */
+        :root {
+            --bg-pure: #000000;
+            --bg-card: #080808;
+            --text-pure: #ffffff;
+            --text-muted: #d0d0d0;
+            --border-accent: #ffffff;
+            --font-heading: 'Oswald', sans-serif;
+            --font-body: 'Merriweather', serif;
+        }
 
-body {
-    -webkit-user-select: none;   /* Safari e iOS Mobile */
-    -moz-user-select: none;      /* Firefox */
-    -ms-user-select: none;       /* Internet Explorer/Edge */
-    user-select: none;           /* Chrome, Opera e Edge */
-    -webkit-touch-callout: none; /* Bloqueia o menu de toque longo no iOS/Android (Mobile) */
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-pure);
+            color: var(--text-muted);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            -webkit-user-select: none;   
+            -moz-user-select: none;      
+            -ms-user-select: none;       
+            user-select: none;           
+            -webkit-touch-callout: none; 
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 140px 20px 60px 20px;
+            position: relative;
+            z-index: 10;
+        }
 
         /* ==========================================================================
-           Estilos para a SPA (Single Page Application)
+           Navegação
+           ========================================================================== */
+        .navbar {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .logo-img {
+            width: 60px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.15));
+        }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-text .title {
+            font-family: var(--font-heading);
+            color: var(--text-pure);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .logo-text .subtitle {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-links a {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-pure);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--text-pure);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        .nav-links a:hover {
+            color: var(--text-muted);
+            text-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+        }
+
+        /* ==========================================================================
+           Hero
+           ========================================================================== */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        .hero-text-area {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .brand-title {
+            font-family: var(--font-heading);
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: var(--text-pure);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+        }
+        .bio-text {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+        }
+        .hero-divider {
+            width: 60px;
+            height: 4px;
+            background-color: var(--text-pure);
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+        }
+        .hero-avatar-area {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .profile-pic {
+            width: 100%;
+            max-width: 450px;
+            object-fit: cover;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: morph 10s ease-in-out infinite;
+            border: 2px solid #333;
+            outline: 1px solid #555;
+            outline-offset: 4px;
+            box-shadow: 0 20px 50px rgba(255, 255, 255, 0.05);
+        }
+        @keyframes morph {
+            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            50% { border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
+            100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        }
+
+        /* ==========================================================================
+           Cards e Grids
+           ========================================================================== */
+        .content-section {
+            margin-bottom: 100px;
+            scroll-margin-top: 120px;
+            position: relative;
+        }
+        .content-section::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--text-pure), transparent);
+            margin: 60px auto 0;
+            opacity: 0.3;
+        }
+        .content-section:last-of-type::after {
+            display: none;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .compact-grid {
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        }
+        .grid-card {
+            background: linear-gradient(145deg, #0a0a0a, #050505);
+            border: 1px solid #1a1a1a;
+            border-bottom: 3px solid var(--border-accent);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.03);
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            padding: 20px;
+        }
+        .grid-card .favicon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9));
+            transition: transform 0.3s ease;
+        }
+        .grid-card span {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            color: var(--text-pure);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .grid-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.08);
+            border-bottom-color: #cccccc;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .grid-card:hover .favicon {
+            transform: scale(1.1);
+        }
+
+        /* ==========================================================================
+           Estilos para a SPA
            ========================================================================== */
         .secao-pagina {
-            display: none; /* Esconde as abas que não estão ativas */
+            display: none;
             animation: fadeIn 0.5s ease forwards;
         }
 
         .secao-ativa {
-            display: block; /* Mostra apenas a aba ativa */
+            display: block;
         }
 
         /* ==========================================================================
-           Estilos da Página Sobre
+           Página Sobre
            ========================================================================== */
         .about-container {
             max-width: 750px;
@@ -78,21 +332,13 @@ body {
             font-size: 1.1rem;
         }
 
-        @media (max-width: 768px) {
-            .about-title {
-                font-size: 2.8rem;
-                margin-bottom: 30px;
-            }
-            .about-text {
-                font-size: 0.95rem; 
-                text-align: justify; /* Correção: Alterado de left para justify no mobile */
-                line-height: 1.8;
-            }
-        }
-
         /* ==========================================================================
-           Estilos da Página Ebooks
+           Página Ebooks
            ========================================================================== */
+        .ebooks-header {
+            margin-bottom: 60px;
+            margin-top: 20px;
+        }
         .ebook-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -157,41 +403,153 @@ body {
             line-height: 1.3;
         }
 
-        .ebook-action {
+        /* Botão estilizado para "Comprar" */
+        .btn-comprar {
+            color: #8fce00; /* Verde Claro */
             font-family: var(--font-heading);
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            font-size: 0.95rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             align-self: flex-start;
-            position: relative;
-            padding-bottom: 4px;
+            border: 1px solid #8fce00;
+            padding: 8px 18px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .ebook-card:hover .btn-comprar {
+            background-color: #8fce00;
+            color: #000000;
+            box-shadow: 0 0 15px rgba(143, 206, 0, 0.4);
+        }
+
+        /* ==========================================================================
+           Animação fade-in
+           ========================================================================== */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* ==========================================================================
+           Rodapé
+           ========================================================================== */
+        .site-footer {
+            border-top: 1px solid #1a1a1a;
+            background-color: rgba(0, 0, 0, 0.8);
+            margin-top: 40px;
+            padding-top: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .copyright {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .disclaimer-link {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             transition: color 0.3s ease;
         }
-
-        .ebook-action::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--text-pure);
-            transition: width 0.3s ease;
-        }
-
-        .ebook-card:hover .ebook-action {
+        .disclaimer-link:hover {
             color: var(--text-pure);
+            text-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
         }
 
-        .ebook-card:hover .ebook-action::after {
-            width: 100%;
-        }
-
+        /* ==========================================================================
+           RESPONSIVIDADE MOBILE
+           ========================================================================== */
         @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero-section {
+                grid-template-columns: 60% 35%; 
+                text-align: left;
+                gap: 5%; 
+                align-items: center;
+            }
+            .hero-avatar-area {
+                justify-content: flex-end;
+                order: 0; 
+            }
+            .hero-divider {
+                margin: 0;
+                width: 40px; 
+            }
+            .brand-title {
+                font-size: 1.8rem; 
+                letter-spacing: 2px;
+                margin-bottom: 10px;
+            }
+            .bio-text {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+            .about-title {
+                font-size: 2.8rem;
+                margin-bottom: 30px;
+            }
+            .about-text {
+                font-size: 0.95rem; 
+                text-align: justify; 
+                line-height: 1.8;
+            }
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .compact-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            #plataformas .grid-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            #plataformas .grid-card,
+            .compact-grid .grid-card {
+                padding: 15px 5px;
+            }
+            #plataformas .grid-card .favicon,
+            .compact-grid .grid-card .favicon {
+                width: 32px;
+                height: 32px;
+                margin-bottom: 10px;
+            }
+            #plataformas .grid-card span,
+            .compact-grid .grid-card span {
+                font-size: 0.7rem;
+                letter-spacing: 0.5px;
+            }
             .ebook-grid {
                 grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
                 gap: 20px;
@@ -201,6 +559,11 @@ body {
             }
             .ebook-title {
                 font-size: 1.1rem;
+            }
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
             }
         }
         
@@ -212,9 +575,29 @@ body {
                 margin-right: auto;
             }
         }
+
+        @media (max-width: 380px) {
+            .hero-section {
+                grid-template-columns: 55% 40%;
+            }
+            .brand-title {
+                font-size: 1.5rem;
+            }
+            .compact-grid,
+            #plataformas .grid-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .compact-grid .grid-card span,
+            #plataformas .grid-card span {
+                font-size: 0.6rem;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Container do Particles.js para interatividade via JSON -->
+    <div id="particles-js" style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1;"></div>
 
     <header class="navbar">
         <div class="nav-container">
@@ -390,7 +773,7 @@ body {
         </div>
 
         <div id="ebooks" class="secao-pagina">
-            <section class="ebooks-header fade-in" style="margin-bottom: 60px; margin-top: 20px;">
+            <section class="ebooks-header fade-in">
                 <h1 class="brand-title" style="text-align: center; font-size: 4rem; margin-bottom: 20px;">EBOOKS</h1>
                 <p style="text-align: center; max-width: 650px; margin: 0 auto; color: var(--text-muted); font-size: 1.15rem; line-height: 1.8; font-style: italic;">
                     Livros que escrevi em momentos de tédio e momentos de inspiração; usei meu networking como banca examinadora antes de publicá-los. Boa leitura.
@@ -400,33 +783,33 @@ body {
             <section class="content-section fade-in">
                 <div class="ebook-grid">
                     
-                    <a href="https://pay.kiwify.com.br/kEiuOHZ" target="_blank" class="ebook-card">
+                    <a href="https://pay.kiwify.com.br/Dq0bUT7" target="_blank" class="ebook-card">
                         <div class="ebook-cover-wrapper">
-                            <img src="https://aws-assets.kiwify.com.br/cdn-cgi/image/fit=scale-down,width=600/iWRlDEE5hlcksuA/1000070140_11bc59454a65445995425be2743da2f8.png" alt="Capa do Ebook 1" class="ebook-cover">
+                            <img src="https://aws-assets.kiwify.com.br/iWRlDEE5hlcksuA/cristianismo-s.a_02e4355a25114b40bc110ca269c1536f.jpeg" alt="Capa Cristianismo S.A." class="ebook-cover">
                         </div>
                         <div class="ebook-info">
-                            <h3 class="ebook-title">Amém pra quem?</h3>
-                            <span class="ebook-action">Ver na Kiwify <i class="fas fa-arrow-right"></i></span>
+                            <h3 class="ebook-title">Cristianismo S.A.</h3>
+                            <span class="btn-comprar">Comprar <i class="fas fa-shopping-cart"></i></span>
                         </div>
                     </a>
     
-                    <a href="https://pay.kiwify.com.br/MNQVMaU" target="_blank" class="ebook-card">
+                    <a href="https://pay.kiwify.com.br/ZLMUDSc" target="_blank" class="ebook-card">
                         <div class="ebook-cover-wrapper">
-                            <img src="https://aws-assets.kiwify.com.br/cdn-cgi/image/fit=scale-down,width=600/iWRlDEE5hlcksuA/1000062020_82e5825cb82841d48d4abdbf362d3778.jpg" alt="Capa do Ebook 2" class="ebook-cover">
+                            <img src="https://aws-assets.kiwify.com.br/iWRlDEE5hlcksuA/mafia-do-dizimo_e6e3e30141d84a22a335a4632bea7aca.jpeg" alt="Capa A Máfia do Dízimo" class="ebook-cover">
                         </div>
                         <div class="ebook-info">
-                            <h3 class="ebook-title">Como debater com crente</h3>
-                            <span class="ebook-action">Ver na Kiwify <i class="fas fa-arrow-right"></i></span>
+                            <h3 class="ebook-title">A Máfia do Dízimo</h3>
+                            <span class="btn-comprar">Comprar <i class="fas fa-shopping-cart"></i></span>
                         </div>
                     </a>
     
-                    <a href="https://pay.kiwify.com.br/DJzH37x" target="_blank" class="ebook-card">
+                    <a href="https://pay.kiwify.com.br/ipb0t3N" target="_blank" class="ebook-card">
                         <div class="ebook-cover-wrapper">
-                            <img src="https://aws-assets.kiwify.com.br/iWRlDEE5hlcksuA/Duck-ai-image-2026-07-11-04-25_6da36f5bf61b47ee8b52be70cf000ded.jpeg" alt="Capa do Ebook 3" class="ebook-cover">
+                            <img src="https://aws-assets.kiwify.com.br/iWRlDEE5hlcksuA/evangelistao_308de3a440bd40b4941f566f86d95672.jpeg" alt="Capa Sobrevivendo ao Evangelistão" class="ebook-cover">
                         </div>
                         <div class="ebook-info">
-                            <h3 class="ebook-title">Jogando Xadrez com Pombo</h3>
-                            <span class="ebook-action">Ver na Kiwify <i class="fas fa-arrow-right"></i></span>
+                            <h3 class="ebook-title">Sobrevivendo ao Evangelistão</h3>
+                            <span class="btn-comprar">Comprar <i class="fas fa-shopping-cart"></i></span>
                         </div>
                     </a>
     
@@ -445,57 +828,68 @@ body {
         </div>
     </footer>
 
+    <!-- Adicionando a biblioteca de partículas e a injeção JSON para interatividade -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 45, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ffffff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.15, "random": true },
+                "size": { "value": 2, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out" }
+            },
+            "interactivity": {
+                "detect_on": "window",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } },
+                    "push": { "particles_nb": 3 }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
 
-// 1. Bloqueia o menu de clique direito (Desktop) e clique longo (Mobile)
-document.addEventListener('contextmenu', event => event.preventDefault());
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('copy', event => event.preventDefault());
+        document.addEventListener('dragstart', event => event.preventDefault());
+        
+        document.addEventListener('keydown', event => {
+            const ctrlOuCmd = event.ctrlKey || event.metaKey;
+            const teclasProibidas = ['c', 'C', 'a', 'A', 'u', 'U', 's', 'S'];
+            if (ctrlOuCmd && teclasProibidas.includes(event.key)) {
+                event.preventDefault();
+            }
+            if (event.key === 'F12') {
+                event.preventDefault();
+            }
+        });
 
-// 2. Bloqueia o evento nativo de cópia
-document.addEventListener('copy', event => event.preventDefault());
-
-// 3. Bloqueia o arrastamento de imagens e links
-document.addEventListener('dragstart', event => event.preventDefault());
-
-// 4. Bloqueia atalhos do teclado (Ctrl+C, Ctrl+A, Ctrl+U, Ctrl+S e F12)
-document.addEventListener('keydown', event => {
-    // Detecta se a tecla Ctrl (ou Cmd no Mac) está pressionada junto com C, A, U ou S
-    const ctrlOuCmd = event.ctrlKey || event.metaKey;
-    const teclasProibidas = ['c', 'C', 'a', 'A', 'u', 'U', 's', 'S'];
-
-    if (ctrlOuCmd && teclasProibidas.includes(event.key)) {
-        event.preventDefault();
-    }
-
-    // Bloqueia a tecla F12 (Inspecionar elemento)
-    if (event.key === 'F12') {
-        event.preventDefault();
-    }
-});
-
-        // Correção: Adicionado 'event' como parâmetro para impedir o comportamento nativo
         function mudarPagina(event, idPagina, elementoClicado) {
-            // Previne o "pulo" instantâneo que a tag <a> com href="#" ou "#id" causa
             event.preventDefault(); 
             
-            // 1. Esconde todas as seções principais
             let secoes = document.querySelectorAll('.secao-pagina');
             secoes.forEach(secao => {
                 secao.classList.remove('secao-ativa');
             });
             
-            // 2. Mostra a seção clicada
             document.getElementById(idPagina).classList.add('secao-ativa');
 
-            // 3. Remove a classe 'active' de todos os links do menu
             let links = document.querySelectorAll('.nav-btn');
             links.forEach(link => {
                 link.classList.remove('active');
             });
 
-            // 4. Adiciona a classe 'active' apenas no link que foi clicado
             elementoClicado.classList.add('active');
             
-            // 5. Rola suavemente para o topo ao trocar de aba sem conflitos
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
