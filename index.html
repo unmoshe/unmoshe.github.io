@@ -13,14 +13,16 @@
 
     <style>
         /* ==========================================================================
-           Configurações Base e Identidade Visual (Tema Dark Premium)
+           Configurações Base e Identidade Visual (Tema Monocromático Premium)
            ========================================================================== */
         :root {
-            --bg-pure: #000000;
-            --bg-card: #080808;
+            --bg-pure: #101010;
+            --bg-section: #151515;
+            --bg-card: #1c1c1c;
             --text-pure: #ffffff;
-            --text-muted: #d0d0d0;
-            --border-accent: #ffffff;
+            --text-muted: #888888;
+            --accent-color: #d0d0d0; /* Cinza claro substituindo o laranja */
+            --accent-highlight: #e0e0e0;
             --font-heading: 'Oswald', sans-serif;
             --font-body: 'Merriweather', serif;
         }
@@ -46,6 +48,7 @@
             -webkit-touch-callout: none; 
         }
 
+        /* Efeito de Ruído no Fundo */
         body::before {
             content: "";
             position: fixed;
@@ -59,11 +62,11 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        .main-container {
+        .container-inner {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 140px 20px 60px 20px;
+            padding: 100px 20px 60px 20px;
             position: relative;
             z-index: 10;
         }
@@ -73,15 +76,15 @@
            ========================================================================== */
         .navbar {
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
             position: fixed;
             top: 0;
             left: 0;
             z-index: 100;
+            padding-top: 10px;
         }
         .nav-container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             display: flex;
@@ -92,155 +95,265 @@
             display: flex;
             align-items: center;
             gap: 15px;
-        }
-        .logo-img {
-            width: 60px;
-            height: auto;
-            object-fit: contain;
-            filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.15));
-        }
-        .logo-text {
-            display: flex;
-            flex-direction: column;
+            text-decoration: none;
         }
         .logo-text .title {
             font-family: var(--font-heading);
             color: var(--text-pure);
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            text-transform: uppercase;
             letter-spacing: 1px;
-        }
-        .logo-text .subtitle {
-            font-size: 0.7rem;
-            color: var(--text-muted);
         }
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 40px;
+            align-items: center;
         }
         .nav-links a {
             font-family: var(--font-heading);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-pure);
+            letter-spacing: 2px;
+            color: var(--text-muted);
             text-decoration: none;
             transition: all 0.3s ease;
-            position: relative;
         }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--text-pure);
-            transition: width 0.3s ease;
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-pure);
         }
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
+        
+        .btn-talk {
+            background-color: var(--accent-color);
+            color: #000 !important;
+            padding: 8px 20px;
+            font-size: 0.8rem !important;
+            font-weight: 700;
+            border-radius: 4px;
         }
-        .nav-links a:hover {
-            color: var(--text-muted);
-            text-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+        .btn-talk:hover {
+            background-color: var(--text-pure);
         }
 
         /* ==========================================================================
-           Hero
+           Fullscreen Hero
            ========================================================================== */
-        .hero-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            margin-bottom: 60px;
-        }
-        .hero-text-area {
+        .hero-fullscreen {
+            height: 100vh;
+            width: 100%;
+            background-image: url('unmoshehero.webp');
+            background-size: cover;
+            background-position: center top;
+            position: relative;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            align-items: center;
+            z-index: 1;
         }
-        .brand-title {
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(16,16,16,0.95) 0%, rgba(16,16,16,0.6) 50%, rgba(16,16,16,0.1) 100%);
+            z-index: 2;
+        }
+        /* Gradiente para fundir o hero com o resto da página */
+        .hero-bottom-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to top, var(--bg-pure) 0%, transparent 100%);
+            z-index: 3;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 20px;
+            margin-top: 80px;
+        }
+        .hero-hello {
+            color: var(--accent-color);
             font-family: var(--font-heading);
-            font-size: 4.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: 8rem;
             font-weight: 700;
             color: var(--text-pure);
-            line-height: 1.1;
+            line-height: 1;
             margin-bottom: 20px;
-            letter-spacing: 4px;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+            letter-spacing: -2px;
+            text-transform: uppercase;
         }
-        .bio-text {
-            font-size: 1.3rem;
-            color: var(--text-muted);
-            font-style: italic;
-            margin-bottom: 30px;
-            line-height: 1.8;
-            letter-spacing: 0.5px;
+        .hero-role {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            color: var(--text-pure);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
         }
-        .hero-divider {
-            width: 60px;
-            height: 4px;
-            background-color: var(--text-pure);
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
-        }
-        .hero-avatar-area {
+        .hero-socials {
             display: flex;
-            justify-content: flex-end;
+            gap: 15px;
         }
-        .profile-pic {
-            width: 100%;
-            max-width: 450px;
-            object-fit: cover;
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            animation: morph 10s ease-in-out infinite;
-            border: 2px solid #333;
-            outline: 1px solid #555;
-            outline-offset: 4px;
-            box-shadow: 0 20px 50px rgba(255, 255, 255, 0.05);
+        .hero-socials a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-pure);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
         }
-        @keyframes morph {
-            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-            50% { border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
-            100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        .hero-socials a:hover {
+            background-color: var(--accent-color);
+            color: #000;
+            transform: translateY(-3px);
         }
 
         /* ==========================================================================
-           Cards e Grids
+           Seções com Estilo Template (Títulos e Marca D'água)
            ========================================================================== */
-        .content-section {
-            margin-bottom: 100px;
-            scroll-margin-top: 120px;
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 50px;
             position: relative;
         }
-        .content-section::after {
-            content: '';
+        .title-wrap {
+            position: relative;
+        }
+        .section-number {
+            color: var(--accent-color);
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
             display: block;
-            width: 80px;
-            height: 2px;
-            background: linear-gradient(90deg, var(--text-pure), transparent);
-            margin: 60px auto 0;
-            opacity: 0.3;
+            margin-bottom: 5px;
         }
-        .content-section:last-of-type::after {
-            display: none;
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--text-pure);
+            letter-spacing: -1px;
+            text-transform: capitalize;
+            position: relative;
+            z-index: 2;
         }
+        .section-watermark {
+            position: absolute;
+            top: 50%;
+            left: -20px;
+            transform: translateY(-50%);
+            font-family: var(--font-heading);
+            font-size: 8rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.02);
+            z-index: 1;
+            text-transform: uppercase;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .view-all-btn {
+            background-color: #222;
+            color: var(--text-pure);
+            font-family: var(--font-heading);
+            padding: 12px 25px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        .view-all-btn:hover {
+            background-color: #333;
+        }
+
+        /* ==========================================================================
+           Cards de Projetos (Estilo Services)
+           ========================================================================== */
+        .content-section {
+            margin-bottom: 120px;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .service-card {
+            background-color: var(--bg-card);
+            padding: 50px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        /* O primeiro card destacado */
+        .service-card.highlight {
+            background-color: var(--accent-highlight);
+        }
+        .service-icon {
+            width: 45px;
+            height: 45px;
+            margin-bottom: 30px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        .service-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--text-pure);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .service-card.highlight .service-title {
+            color: #111;
+        }
+        .service-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .service-card.highlight .service-desc {
+            color: #333;
+        }
+
+        /* Grids Menores (Conexões / Plataformas) */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-        }
-        .compact-grid {
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
         }
         .grid-card {
-            background: linear-gradient(145deg, #0a0a0a, #050505);
-            border: 1px solid #1a1a1a;
-            border-bottom: 3px solid var(--border-accent);
-            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.03);
+            background: #1a1a1a;
+            border: 1px solid #252525;
             aspect-ratio: 1 / 1;
             display: flex;
             flex-direction: column;
@@ -248,83 +361,118 @@
             justify-content: center;
             text-decoration: none;
             border-radius: 6px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: background 0.3s ease;
             padding: 20px;
         }
+        .grid-card:hover {
+            background: #252525;
+        }
         .grid-card .favicon {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             margin-bottom: 15px;
             border-radius: 8px;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9));
-            transition: transform 0.3s ease;
         }
         .grid-card span {
             font-family: var(--font-heading);
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--text-pure);
             letter-spacing: 1px;
             text-transform: uppercase;
             text-align: center;
         }
-        .grid-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.08);
-            border-bottom-color: #cccccc;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+        /* ==========================================================================
+           Ebooks Section (Estilo Videos do Template)
+           ========================================================================== */
+        .ebook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
-        .grid-card:hover .favicon {
-            transform: scale(1.1);
+        .ebook-card-template {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+            aspect-ratio: 3/4;
+        }
+        .ebook-card-template img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .ebook-card-template:hover img {
+            transform: scale(1.05);
+        }
+        .ebook-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+        }
+        .ebook-icon-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--accent-color);
+            font-size: 3rem;
+            opacity: 0.8;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .ebook-card-template:hover .ebook-icon-play {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .ebook-card-title {
+            font-family: var(--font-heading);
+            color: var(--text-pure);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
         }
 
         /* ==========================================================================
-           Estilos para a SPA
+           SPA e Utilidades
            ========================================================================== */
         .secao-pagina {
             display: none;
             animation: fadeIn 0.5s ease forwards;
         }
-
         .secao-ativa {
             display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* ==========================================================================
            Página Sobre
            ========================================================================== */
-        .about-container {
-            max-width: 750px;
-            margin: 0 auto;
-            padding: 20px 20px 80px 20px;
-        }
-
-        .about-title {
-            font-family: var(--font-heading);
-            font-size: 3.5rem;
-            color: var(--text-pure);
-            text-align: center;
-            margin-bottom: 50px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
         .about-text {
-            font-family: var(--font-body);
             font-size: 1.05rem; 
             color: var(--text-muted);
             line-height: 1.9;
             margin-bottom: 25px;
-            text-align: justify;
             font-weight: 300;
         }
-
         .about-text strong {
             color: var(--text-pure);
-            font-weight: 700;
         }
-
         .about-quote {
-            border-left: 2px solid var(--text-pure);
+            border-left: 2px solid var(--accent-color);
             padding-left: 20px;
             margin: 40px 0;
             font-style: italic;
@@ -333,129 +481,15 @@
         }
 
         /* ==========================================================================
-           Página Ebooks
-           ========================================================================== */
-        .ebooks-header {
-            margin-bottom: 60px;
-            margin-top: 20px;
-        }
-        .ebook-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .ebook-card {
-            background: linear-gradient(145deg, #0a0a0a, #050505);
-            border: 1px solid #1a1a1a;
-            border-bottom: 3px solid var(--border-accent);
-            border-radius: 8px;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-
-        .ebook-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.08);
-            border-bottom-color: #cccccc;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .ebook-cover-wrapper {
-            width: 100%;
-            overflow: hidden;
-            border-bottom: 1px solid #1a1a1a;
-            background-color: #111;
-        }
-
-        .ebook-cover {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 2 / 3;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .ebook-card:hover .ebook-cover {
-            transform: scale(1.06);
-        }
-
-        .ebook-info {
-            padding: 25px 20px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
-
-        .ebook-title {
-            font-family: var(--font-heading);
-            color: var(--text-pure);
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            line-height: 1.3;
-        }
-
-        /* Botão estilizado para "Comprar" */
-        .btn-comprar {
-            color: #8fce00; /* Verde Claro */
-            font-family: var(--font-heading);
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            align-self: flex-start;
-            border: 1px solid #8fce00;
-            padding: 8px 18px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .ebook-card:hover .btn-comprar {
-            background-color: #8fce00;
-            color: #000000;
-            box-shadow: 0 0 15px rgba(143, 206, 0, 0.4);
-        }
-
-        /* ==========================================================================
-           Animação fade-in
-           ========================================================================== */
-        .fade-in {
-            opacity: 0;
-            animation: fadeIn 0.8s ease forwards;
-        }
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
-        /* ==========================================================================
            Rodapé
            ========================================================================== */
         .site-footer {
             border-top: 1px solid #1a1a1a;
-            background-color: rgba(0, 0, 0, 0.8);
-            margin-top: 40px;
-            padding-top: 20px;
+            background-color: var(--bg-pure);
+            padding: 40px 20px;
+            text-align: center;
             position: relative;
             z-index: 10;
-        }
-        .footer-content {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
         .copyright {
             font-family: var(--font-heading);
@@ -464,154 +498,50 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
-        .disclaimer-link {
-            font-family: var(--font-heading);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-        }
-        .disclaimer-link:hover {
-            color: var(--text-pure);
-            text-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
-        }
 
         /* ==========================================================================
            RESPONSIVIDADE MOBILE
            ========================================================================== */
+        @media (max-width: 900px) {
+            .hero-title { font-size: 5rem; }
+            .section-title { font-size: 3rem; }
+            .section-watermark { font-size: 5rem; left: 0; }
+            .section-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+        }
         @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .nav-links {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .hero-section {
-                grid-template-columns: 60% 35%; 
-                text-align: left;
-                gap: 5%; 
-                align-items: center;
-            }
-            .hero-avatar-area {
-                justify-content: flex-end;
-                order: 0; 
-            }
-            .hero-divider {
-                margin: 0;
-                width: 40px; 
-            }
-            .brand-title {
-                font-size: 1.8rem; 
-                letter-spacing: 2px;
-                margin-bottom: 10px;
-            }
-            .bio-text {
-                font-size: 0.9rem;
-                margin-bottom: 15px;
-            }
-            .about-title {
-                font-size: 2.8rem;
-                margin-bottom: 30px;
-            }
-            .about-text {
-                font-size: 0.95rem; 
-                text-align: justify; 
-                line-height: 1.8;
-            }
-            .grid-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            .compact-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
-            }
-            #plataformas .grid-container {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
-            }
-            #plataformas .grid-card,
-            .compact-grid .grid-card {
-                padding: 15px 5px;
-            }
-            #plataformas .grid-card .favicon,
-            .compact-grid .grid-card .favicon {
-                width: 32px;
-                height: 32px;
-                margin-bottom: 10px;
-            }
-            #plataformas .grid-card span,
-            .compact-grid .grid-card span {
-                font-size: 0.7rem;
-                letter-spacing: 0.5px;
-            }
-            .ebook-grid {
-                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-                gap: 20px;
-            }
-            .ebook-info {
-                padding: 20px 15px;
-            }
-            .ebook-title {
-                font-size: 1.1rem;
-            }
-            .footer-content {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
+            .nav-container { flex-direction: column; gap: 15px; background: rgba(0,0,0,0.9); }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .hero-title { font-size: 4rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .grid-container { grid-template-columns: repeat(2, 1fr); }
+            .container-inner { padding-top: 60px; }
         }
-        
         @media (max-width: 480px) {
-            .ebook-grid {
-                grid-template-columns: 1fr;
-                max-width: 320px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .hero-section {
-                grid-template-columns: 55% 40%;
-            }
-            .brand-title {
-                font-size: 1.5rem;
-            }
-            .compact-grid,
-            #plataformas .grid-container {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .compact-grid .grid-card span,
-            #plataformas .grid-card span {
-                font-size: 0.6rem;
-            }
+            .hero-title { font-size: 3rem; }
+            .section-watermark { font-size: 3.5rem; }
+            .grid-container { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .grid-card { padding: 15px; }
+            .ebook-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Container do Particles.js para interatividade via JSON -->
+    <!-- Container do Particles.js -->
     <div id="particles-js" style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1;"></div>
 
     <header class="navbar">
         <div class="nav-container">
-            <div class="logo-wrapper">
-                <img src="fav.png" alt="unmoshe" class="logo-img">
+            <a href="#" class="logo-wrapper">
                 <div class="logo-text">
                     <span class="title">unmoshe</span>
-                    <span class="subtitle">Autodidata e polímata</span>
                 </div>
-            </div>
+            </a>
             <nav class="nav-links">
-                <a href="#inicio" onclick="mudarPagina(event, 'inicio', this)" class="nav-btn active">Início</a>
-                <a href="#sobre" onclick="mudarPagina(event, 'sobre', this)" class="nav-btn">Sobre mim</a>
+                <a href="#inicio" onclick="mudarPagina(event, 'inicio', this)" class="nav-btn active">Home</a>
+                <a href="#sobre" onclick="mudarPagina(event, 'sobre', this)" class="nav-btn">Sobre Mim</a>
                 <a href="#ebooks" onclick="mudarPagina(event, 'ebooks', this)" class="nav-btn">Ebooks</a>
+                <a href="https://instagram.com/unmoshe" target="_blank" class="nav-btn btn-talk">CONTATO</a>
             </nav>
         </div>
     </header>
@@ -619,213 +549,228 @@
     <main class="main-container">
         
         <div id="inicio" class="secao-pagina secao-ativa">
-            <section class="hero-section fade-in">
-                <div class="hero-text-area">
-                    <h1 class="brand-title">unmoshe</h1>
-                    <p class="bio-text">Autodidata e polímata.</p>
-                    <div class="hero-divider"></div>
+            
+            <!-- Hero Fullscreen substituindo a entrada antiga -->
+            <section class="hero-fullscreen">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <span class="hero-hello">Olá, eu sou o</span>
+                    <h1 class="hero-title">Moshé</h1>
+                    <p class="hero-role">Autodidata & Polímata</p>
+                    
+                    <div class="hero-socials">
+                        <a href="https://instagram.com/unmoshe" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@unmoshe" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://discord.com/users/293465168526966784" target="_blank"><i class="fab fa-discord"></i></a>
+                        <a href="https://open.spotify.com/user/31jpghiqdhnw5v22d7j3t4ru7qta?si=8f0lDKEtR5yuQgqcTED27Q" target="_blank"><i class="fab fa-spotify"></i></a>
+                    </div>
                 </div>
-                <div class="hero-avatar-area">
-                    <img src="unmoshe.webp" alt="unmoshe" class="profile-pic">
-                </div>
+                <div class="hero-bottom-fade"></div>
             </section>
 
-            <section id="projetos" class="content-section fade-in">
-                <div class="grid-container">
-                    <a class="grid-card" href="https://somostodosateus.github.io" target="_blank" style="--i:1">
-                        <img src="icons/sta.png" alt="StA" class="favicon">
-                        <span>StA</span>
-                    </a>
-                    <a class="grid-card" href="https://subsoloalternativo.github.io" target="_blank" style="--i:2">
-                        <img src="icons/subalt.png" alt="SubAlt" class="favicon">
-                        <span>Subsolo Alternativo</span>
-                    </a>
-                    <a class="grid-card" href="https://spicycult.blogspot.com" target="_blank" style="--i:3">
-                        <img src="icons/spicycult.jpeg" alt="SpicyCult" class="favicon">
-                        <span>SpicyCult</span>
-                    </a>
-                    <a class="grid-card" href="https://youtube.com/@tapadosfatos/" target="_blank" style="--i:4">
-                        <img src="icons/tdf.jpeg" alt="Tapa dos Fatos" class="favicon">
-                        <span>Tapa dos Fatos</span>
-                    </a>
-                </div>
-            </section>
+            <div class="container-inner">
+                
+                <!-- Projetos no estilo "Services" do template -->
+                <section id="projetos" class="content-section">
+                    <div class="section-header">
+                        <div class="title-wrap">
+                            <span class="section-number">01.</span>
+                            <h2 class="section-title">Projetos</h2>
+                            <span class="section-watermark">Projetos</span>
+                        </div>
+                        <a href="#conexoes" class="view-all-btn">Ver Redes</a>
+                    </div>
 
-            <section id="conexoes" class="content-section fade-in">
-                <div class="grid-container compact-grid">
-                    <a class="grid-card" href="https://instagram.com/unmoshe" target="_blank" style="--i:1">
-                        <img src="https://www.google.com/s2/favicons?domain=instagram.com&sz=128" alt="Instagram" class="favicon">
-                        <span>Instagram</span>
-                    </a>
-                    <a class="grid-card" href="https://www.facebook.com/unmoshe/" target="_blank" style="--i:2">
-                        <img src="https://www.google.com/s2/favicons?domain=facebook.com&sz=128" alt="Facebook" class="favicon">
-                        <span>Facebook</span>
-                    </a>
-                    <a class="grid-card" href="https://discord.com/users/293465168526966784" target="_blank" style="--i:3">
-                        <img src="https://www.google.com/s2/favicons?domain=discord.com&sz=128" alt="Discord" class="favicon">
-                        <span>Discord</span>
-                    </a>
-                    <a class="grid-card" href="https://open.spotify.com/user/31jpghiqdhnw5v22d7j3t4ru7qta?si=8f0lDKEtR5yuQgqcTED27Q" target="_blank" style="--i:4">
-                        <img src="https://www.google.com/s2/favicons?domain=spotify.com&sz=128" alt="Spotify" class="favicon">
-                        <span>Spotify</span>
-                    </a>
-                    <a class="grid-card" href="https://www.reddit.com/user/unmoshe/" target="_blank" style="--i:5">
-                        <img src="https://www.google.com/s2/favicons?domain=reddit.com&sz=128" alt="Reddit" class="favicon">
-                        <span>Reddit</span>
-                    </a>
-                    <a class="grid-card" href="https://youtube.com/@unmoshe" target="_blank" style="--i:6">
-                        <img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=128" alt="YouTube" class="favicon">
-                        <span>YouTube</span>
-                    </a>
-                    <a class="grid-card" href="https://t.me/unmoshe" target="_blank" style="--i:7">
-                        <img src="https://www.google.com/s2/favicons?domain=t.me&sz=128" alt="Telegram" class="favicon">
-                        <span>Telegram</span>
-                    </a>
-                    <a class="grid-card" href="https://www.twitch.tv/unmoshe" target="_blank" style="--i:8">
-                        <img src="https://www.google.com/s2/favicons?domain=twitch.tv&sz=128" alt="Twitch" class="favicon">
-                        <span>Twitch</span>
-                    </a>
-                    <a class="grid-card" href="https://vk.com/unmoshe" target="_blank" style="--i:9">
-                        <img src="https://www.google.com/s2/favicons?domain=vk.com&sz=128" alt="VKontakte" class="favicon">
-                        <span>VKontakte</span>
-                    </a>
-                    <a class="grid-card" href="https://boxd.it/kig67" target="_blank" style="--i:10">
-                        <img src="https://www.google.com/s2/favicons?domain=boxd.it&sz=128" alt="Letterboxd" class="favicon">
-                        <span>Letterboxd</span>
-                    </a>
-                    <a class="grid-card" href="https://www.behance.net/unmoshe" target="_blank" style="--i:11">
-                        <img src="https://www.google.com/s2/favicons?domain=behance.net&sz=128" alt="Behance" class="favicon">
-                        <span>Behance</span>
-                    </a>
-                    <a class="grid-card" href="https://soundcloud.com/unmoshe" target="_blank" style="--i:12">
-                        <img src="https://www.google.com/s2/favicons?domain=soundcloud.com&sz=128" alt="Soundcloud" class="favicon">
-                        <span>Soundcloud</span>
-                    </a>
-                </div>
-            </section>
+                    <div class="services-grid">
+                        <a href="https://somostodosateus.github.io" target="_blank" class="service-card highlight">
+                            <img src="icons/sta.png" alt="StA" class="service-icon">
+                            <h3 class="service-title">StA</h3>
+                            <p class="service-desc">Acesse o portal Somos Todos Ateus. Filosofia, debates e artigos sobre ceticismo.</p>
+                        </a>
 
-            <section id="plataformas" class="content-section fade-in">
-                <div class="grid-container">
-                    <a class="grid-card" href="https://steamcommunity.com/id/unmoshe" target="_blank" style="--i:1">
-                        <img src="https://www.google.com/s2/favicons?domain=steamcommunity.com&sz=128" alt="Steam" class="favicon">
-                        <span>Steam</span>
-                    </a>
-                    <a class="grid-card" href="https://chess.com/member/unm0she" target="_blank" style="--i:2">
-                        <img src="https://www.google.com/s2/favicons?domain=chess.com&sz=128" alt="Chess.com" class="favicon">
-                        <span>Chess.com</span>
-                    </a>
-                    <a class="grid-card" href="https://lichess.org/@/unm0she" target="_blank" style="--i:3">
-                        <img src="https://www.google.com/s2/favicons?domain=lichess.org&sz=128" alt="Lichess" class="favicon">
-                        <span>Lichess</span>
-                    </a>
-                    <a class="grid-card" href="https://roblox.com/pt/users/10960589649/profile" target="_blank" style="--i:4">
-                        <img src="https://www.google.com/s2/favicons?domain=roblox.com&sz=128" alt="Roblox" class="favicon">
-                        <span>Roblox</span>
-                    </a>
-                    <a class="grid-card" href="https://xbox.com/pt-BR/play/user/Moshe2695" target="_blank" style="--i:5">
-                        <img src="https://www.google.com/s2/favicons?domain=xbox.com&sz=128" alt="Xbox" class="favicon">
-                        <span>Xbox</span>
-                    </a>
-                    <a class="grid-card" href="https://profile.playstation.com/unmoshe" target="_blank" style="--i:6">
-                        <img src="https://www.google.com/s2/favicons?domain=playstation.com&sz=128" alt="PlayStation" class="favicon">
-                        <span>PlayStation</span>
-                    </a>
-                </div>
-            </section>
+                        <a href="https://subsoloalternativo.github.io" target="_blank" class="service-card">
+                            <img src="icons/subalt.png" alt="SubAlt" class="service-icon">
+                            <h3 class="service-title">Subsolo Alternativo</h3>
+                            <p class="service-desc">Mergulhe no universo musical obscuro dos anos 80, new wave e post-punk.</p>
+                        </a>
+
+                        <a href="https://youtube.com/@tapadosfatos/" target="_blank" class="service-card">
+                            <img src="icons/tdf.jpeg" alt="Tapa dos Fatos" class="service-icon">
+                            <h3 class="service-title">Tapa dos Fatos</h3>
+                            <p class="service-desc">Canal voltado a análises sem filtro. Assista aos conteúdos no YouTube.</p>
+                        </a>
+                    </div>
+                </section>
+
+                <section id="conexoes" class="content-section">
+                    <div class="section-header">
+                        <div class="title-wrap">
+                            <span class="section-number">02.</span>
+                            <h2 class="section-title">Redes Sociais</h2>
+                            <span class="section-watermark">Conexões</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-container">
+                        <a class="grid-card" href="https://www.facebook.com/unmoshe/" target="_blank">
+                            <img src="https://www.google.com/s2/favicons?domain=facebook.com&sz=128" alt="Facebook" class="favicon">
+                            <span>Facebook</span>
+                        </a>
+                        <a class="grid-card" href="https://www.reddit.com/user/unmoshe/" target="_blank">
+                            <img src="https://www.google.com/s2/favicons?domain=reddit.com&sz=128" alt="Reddit" class="favicon">
+                            <span>Reddit</span>
+                        </a>
+                        <a class="grid-card" href="https://t.me/unmoshe" target="_blank">
+                            <img src="https://www.google.com/s2/favicons?domain=t.me&sz=128" alt="Telegram" class="favicon">
+                            <span>Telegram</span>
+                        </a>
+                        <a class="grid-card" href="https://www.twitch.tv/unmoshe" target="_blank">
+                            <img src="https://www.google.com/s2/favicons?domain=twitch.tv&sz=128" alt="Twitch" class="favicon">
+                            <span>Twitch</span>
+                        </a>
+                        <a class="grid-card" href="https://vk.com/unmoshe" target="_blank">
+                            <img src="https://www.google.com/s2/favicons?domain=vk.com&sz=128" alt="VKontakte" class="favicon">
+                            <span>VKontakte</span>
+                        </a>
+                        <a class="grid-card" href="https://boxd.it/kig67" target="_blank">
+                            <img src="https://www.google.com/s2/favicons?domain=boxd.it&sz=128" alt="Letterboxd" class="favicon">
+                            <span>Letterboxd</span>
+                        </a>
+                    </div>
+                </section>
+
+                <section id="plataformas" class="content-section">
+                    <div class="section-header">
+                        <div class="title-wrap">
+                            <span class="section-number">03.</span>
+                            <h2 class="section-title">Games & Outros</h2>
+                            <span class="section-watermark">Plataformas</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-container">
+                        <a class="grid-card" href="https://steamcommunity.com/id/unmoshe" target="_blank">
+                            <img src="https://www.google.com/s2/favicons?domain=steamcommunity.com&sz=128" alt="Steam" class="favicon">
+                            <span>Steam</span>
+                        </a>
+                        <a class="grid-card" href="https://chess.com/member/unm0she" target="_blank">
+                            <img src="https://www.google.com/s2/favicons?domain=chess.com&sz=128" alt="Chess.com" class="favicon">
+                            <span>Chess.com</span>
+                        </a>
+                        <a class="grid-card" href="https://lichess.org/@/unm0she" target="_blank">
+                            <img src="https://www.google.com/s2/favicons?domain=lichess.org&sz=128" alt="Lichess" class="favicon">
+                            <span>Lichess</span>
+                        </a>
+                        <a class="grid-card" href="https://roblox.com/pt/users/10960589649/profile" target="_blank">
+                            <img src="https://www.google.com/s2/favicons?domain=roblox.com&sz=128" alt="Roblox" class="favicon">
+                            <span>Roblox</span>
+                        </a>
+                        <a class="grid-card" href="https://xbox.com/pt-BR/play/user/Moshe2695" target="_blank">
+                            <img src="https://www.google.com/s2/favicons?domain=xbox.com&sz=128" alt="Xbox" class="favicon">
+                            <span>Xbox</span>
+                        </a>
+                        <a class="grid-card" href="https://profile.playstation.com/unmoshe" target="_blank">
+                            <img src="https://www.google.com/s2/favicons?domain=playstation.com&sz=128" alt="PlayStation" class="favicon">
+                            <span>PlayStation</span>
+                        </a>
+                    </div>
+                </section>
+            </div>
         </div>
 
         <div id="sobre" class="secao-pagina">
-            <section class="about-container fade-in">
-                <h1 class="about-title">Sobre Mim</h1>
-    
-                <p class="about-text">
-                    Na minha bio diz "Autodidata e polímata". Em bom português: eu tenho uma certa alergia ao tédio e aprendo sozinho o que me dá na telha. Meus projetos e designs são invariavelmente criados usando temas dark, sempre com fundo preto. E antes que você pergunte, não, não é porque eu sou um rockeiro revoltado com a sociedade. É simplesmente porque preto é a minha cor favorita.
-                </p>
-    
-                <p class="about-text">
-                    Tenho um interesse bem particular por armas e táticas militares, bem como sou fascinado pelo universo <strong>007</strong>. Apesar disso sou um cara tranquilo. Tão tranquilo que fisicamente eu não tenho medo de absolutamente nada. O meu único e verdadeiro terror? É não viver a vida que eu secretamente idealizo na minha cabeça. O que é exatamente? Bom, isso só eu e Deus sabemos.
-                </p>
-    
-                <p class="about-text">
-                    E falando Nele: sou um ateu com nome cristão e prestes a mudar para um nome judeu. Confuso? Um pouco. Mas isso não significa que eu seja uma pessoa ruim como a maioria gosta de deduzir sobre quem não acredita em alguém que não tem corpo físico e não dá sinal de vida. Eu adoro uma boa bebida alcoólica para acompanhar a vida, mas calma lá, não sou alcoólatra. Sou apenas um entusiasta focado nos pequenos prazeres.
-                </p>
-    
-                <div class="about-quote">
-                    "Minha verdadeira paixão está nos anos 80. Meu gosto musical é uma viagem direta pra essa década: new wave, rock, metal e post-punk. Se tiver um sintetizador deprê, eu tô dando play."
+            <div class="container-inner">
+                <div class="section-header" style="justify-content: center; text-align: center;">
+                    <div class="title-wrap">
+                        <span class="section-number">Sobre</span>
+                        <h2 class="section-title">O Polímata</h2>
+                        <span class="section-watermark" style="left: 50%; transform: translate(-50%, -50%);">UNMOSHE</span>
+                    </div>
                 </div>
-    
-                <p class="about-text">
-                    No cinema, eu exijo um pouco mais de capricho. Gosto de filmes realistas que tenham um bom <em>gore</em> (se for de ação ou terror), e sou fã de um bom terror psicológico que te faz duvidar da própria sanidade. Agora, se for pra assistir um drama, precisa ter uma sacada intelectual extremamente afiada, daquelas que as pessoas comuns não entenderiam. Sim, sou um pouco pedante com roteiros. Caso não tenha violência explícita ou crítica altamente intelectual, que pelo menos seja algo insano e meio megalomaníaco.
-                </p>
-    
-                <p class="about-text">
-                    Para balancear esse intelecto todo, minha rotina básica inclui assistir a alguém ser desmaiado no <strong>UFC</strong> e acompanhar futebol. Também assisto a vários vídeos de viagens. E quando estou em um estado de espírito completamente zen e despreocupado com o mundo? Eu simplesmente ligo a televisão e fico assistindo a partidas de tênis. 
-                </p>
-    
-                <p class="about-text">
-                    Ah, eu adoro animais. Exceto cobras. Cobras podem ficar bem longe de mim. Também odeio insetos no geral, mas tenho uma estranha mania: adoro observar formigas e aranhas trabalhando. Elas sempre foram o meu entretenimento natural desde criança. Fico lá, olhando, e evito ao máximo matá-las. Deixo elas pagarem o aluguel com o trabalho braçal.
-                </p>
-    
-                <p class="about-text" style="margin-top: 40px; text-align: center; border-top: 1px solid #1a1a1a; padding-top: 40px;">
-                    <strong>No fim das contas, sou um cara reservado.</strong><br><br> Tudo o que você acabou de ler é a amostra grátis. O resto da minha vida ou é privado demais para a internet, ou você vai ter que ler algum dos meus ebooks para descobrir os detalhes. Vai lá na aba "Ebooks", escolhe o seu veneno e me ajuda a financiar a minha vida secretamente idealizada.
-                </p>
-            </section>
+                
+                <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2;">
+                    <p class="about-text">
+                        Na minha bio diz "Autodidata e polímata". Em bom português: eu tenho uma certa alergia ao tédio e aprendo sozinho o que me dá na telha. Meus projetos e designs são invariavelmente criados usando temas dark, sempre com fundo preto. E antes que você pergunte, não, não é porque eu sou um rockeiro revoltado com a sociedade. É simplesmente porque preto é a minha cor favorita.
+                    </p>
+        
+                    <p class="about-text">
+                        Tenho um interesse bem particular por armas e táticas militares, bem como sou fascinado pelo universo <strong>007</strong>. Apesar disso sou um cara tranquilo. Tão tranquilo que fisicamente eu não tenho medo de absolutamente nada. O meu único e verdadeiro terror? É não viver a vida que eu secretamente idealizo na minha cabeça. O que é exatamente? Bom, isso só eu e Deus sabemos.
+                    </p>
+        
+                    <p class="about-text">
+                        E falando Nele: sou um ateu com nome cristão e prestes a mudar para um nome judeu. Confuso? Um pouco. Mas isso não significa que eu seja uma pessoa ruim como a maioria gosta de deduzir sobre quem não acredita em alguém que não tem corpo físico e não dá sinal de vida. Eu adoro uma boa bebida alcoólica para acompanhar a vida, mas calma lá, não sou alcoólatra. Sou apenas um entusiasta focado nos pequenos prazeres.
+                    </p>
+        
+                    <div class="about-quote">
+                        "Minha verdadeira paixão está nos anos 80. Meu gosto musical é uma viagem direta pra essa década: new wave, rock, metal e post-punk. Se tiver um sintetizador deprê, eu tô dando play."
+                    </div>
+        
+                    <p class="about-text">
+                        No cinema, eu exijo um pouco mais de capricho. Gosto de filmes realistas que tenham um bom <em>gore</em> (se for de ação ou terror), e sou fã de um bom terror psicológico que te faz duvidar da própria sanidade. Agora, se for pra assistir um drama, precisa ter uma sacada intelectual extremamente afiada, daquelas que as pessoas comuns não entenderiam. Sim, sou um pouco pedante com roteiros. Caso não tenha violência explícita ou crítica altamente intelectual, que pelo menos seja algo insano e meio megalomaníaco.
+                    </p>
+        
+                    <p class="about-text">
+                        Para balancear esse intelecto todo, minha rotina básica inclui assistir a alguém ser desmaiado no <strong>UFC</strong> e acompanhar futebol. Também assisto a vários vídeos de viagens. E quando estou em um estado de espírito completamente zen e despreocupado com o mundo? Eu simplesmente ligo a televisão e fico assistindo a partidas de tênis. 
+                    </p>
+        
+                    <p class="about-text">
+                        Ah, eu adoro animais. Exceto cobras. Cobras podem ficar bem longe de mim. Também odeio insetos no geral, mas tenho uma estranha mania: adoro observar formigas e aranhas trabalhando. Elas sempre foram o meu entretenimento natural desde criança. Fico lá, olhando, e evito ao máximo matá-las. Deixo elas pagarem o aluguel com o trabalho braçal.
+                    </p>
+        
+                    <p class="about-text" style="margin-top: 50px; text-align: center; border-top: 1px solid #333; padding-top: 50px;">
+                        <strong>No fim das contas, sou um cara reservado.</strong><br><br> Tudo o que você acabou de ler é a amostra grátis. O resto da minha vida ou é privado demais para a internet, ou você vai ter que ler algum dos meus ebooks para descobrir os detalhes. Vai lá na aba "Ebooks", escolhe o seu veneno e me ajuda a financiar a minha vida secretamente idealizada.
+                    </p>
+                </div>
+            </div>
         </div>
 
         <div id="ebooks" class="secao-pagina">
-            <section class="ebooks-header fade-in">
-                <h1 class="brand-title" style="text-align: center; font-size: 4rem; margin-bottom: 20px;">EBOOKS</h1>
-                <p style="text-align: center; max-width: 650px; margin: 0 auto; color: var(--text-muted); font-size: 1.15rem; line-height: 1.8; font-style: italic;">
-                    Livros que escrevi em momentos de tédio e momentos de inspiração; usei meu networking como banca examinadora antes de publicá-los. Boa leitura.
-                </p>
-            </section>
-    
-            <section class="content-section fade-in">
-                <div class="ebook-grid">
-                    
-                    <a href="https://pay.kiwify.com.br/Dq0bUT7" target="_blank" class="ebook-card">
-                        <div class="ebook-cover-wrapper">
-                            <img src="https://aws-assets.kiwify.com.br/iWRlDEE5hlcksuA/cristianismo-s.a_02e4355a25114b40bc110ca269c1536f.jpeg" alt="Capa Cristianismo S.A." class="ebook-cover">
-                        </div>
-                        <div class="ebook-info">
-                            <h3 class="ebook-title">Cristianismo S.A.</h3>
-                            <span class="btn-comprar">Comprar <i class="fas fa-shopping-cart"></i></span>
-                        </div>
-                    </a>
-    
-                    <a href="https://pay.kiwify.com.br/ZLMUDSc" target="_blank" class="ebook-card">
-                        <div class="ebook-cover-wrapper">
-                            <img src="https://aws-assets.kiwify.com.br/iWRlDEE5hlcksuA/mafia-do-dizimo_e6e3e30141d84a22a335a4632bea7aca.jpeg" alt="Capa A Máfia do Dízimo" class="ebook-cover">
-                        </div>
-                        <div class="ebook-info">
-                            <h3 class="ebook-title">A Máfia do Dízimo</h3>
-                            <span class="btn-comprar">Comprar <i class="fas fa-shopping-cart"></i></span>
-                        </div>
-                    </a>
-    
-                    <a href="https://pay.kiwify.com.br/ipb0t3N" target="_blank" class="ebook-card">
-                        <div class="ebook-cover-wrapper">
-                            <img src="https://aws-assets.kiwify.com.br/iWRlDEE5hlcksuA/evangelistao_308de3a440bd40b4941f566f86d95672.jpeg" alt="Capa Sobrevivendo ao Evangelistão" class="ebook-cover">
-                        </div>
-                        <div class="ebook-info">
-                            <h3 class="ebook-title">Sobrevivendo ao Evangelistão</h3>
-                            <span class="btn-comprar">Comprar <i class="fas fa-shopping-cart"></i></span>
-                        </div>
-                    </a>
-    
+            <div class="container-inner">
+                <div class="section-header">
+                    <div class="title-wrap">
+                        <span class="section-number">Ebooks</span>
+                        <h2 class="section-title">Obras Publicadas</h2>
+                        <span class="section-watermark">Publicações</span>
+                    </div>
+                    <a href="https://kiwify.com.br" target="_blank" class="view-all-btn">Ver Loja</a>
                 </div>
-            </section>
+        
+                <section class="content-section">
+                    <div class="ebook-grid">
+                        
+                        <a href="https://pay.kiwify.com.br/Dq0bUT7" target="_blank" class="ebook-card-template">
+                            <img src="https://aws-assets.kiwify.com.br/iWRlDEE5hlcksuA/cristianismo-s.a_02e4355a25114b40bc110ca269c1536f.jpeg" alt="Capa Cristianismo S.A.">
+                            <i class="fas fa-shopping-cart ebook-icon-play"></i>
+                            <div class="ebook-overlay">
+                                <h3 class="ebook-card-title">Cristianismo S.A.</h3>
+                            </div>
+                        </a>
+        
+                        <a href="https://pay.kiwify.com.br/ZLMUDSc" target="_blank" class="ebook-card-template">
+                            <img src="https://aws-assets.kiwify.com.br/iWRlDEE5hlcksuA/mafia-do-dizimo_e6e3e30141d84a22a335a4632bea7aca.jpeg" alt="Capa A Máfia do Dízimo">
+                            <i class="fas fa-shopping-cart ebook-icon-play"></i>
+                            <div class="ebook-overlay">
+                                <h3 class="ebook-card-title">A Máfia do Dízimo</h3>
+                            </div>
+                        </a>
+        
+                        <a href="https://pay.kiwify.com.br/ipb0t3N" target="_blank" class="ebook-card-template">
+                            <img src="https://aws-assets.kiwify.com.br/iWRlDEE5hlcksuA/evangelistao_308de3a440bd40b4941f566f86d95672.jpeg" alt="Capa Sobrevivendo ao Evangelistão">
+                            <i class="fas fa-shopping-cart ebook-icon-play"></i>
+                            <div class="ebook-overlay">
+                                <h3 class="ebook-card-title">Sobrevivendo ao<br>Evangelistão</h3>
+                            </div>
+                        </a>
+        
+                    </div>
+                </section>
+            </div>
         </div>
 
     </main>
 
     <footer class="site-footer">
-        <div class="footer-content">
-            <span class="copyright">© 2026 unmoshe | Todos os direitos reservados</span>
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="disclaimer-link">
-                Aviso Legal
-            </a>
-        </div>
+        <span class="copyright">© 2026 unmoshe | Todos os direitos reservados</span>
     </footer>
 
     <!-- Adicionando a biblioteca de partículas e a injeção JSON para interatividade -->
@@ -888,7 +833,9 @@
                 link.classList.remove('active');
             });
 
-            elementoClicado.classList.add('active');
+            if(elementoClicado) {
+                elementoClicado.classList.add('active');
+            }
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
