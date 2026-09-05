@@ -514,15 +514,21 @@
             .nav-container { flex-direction: column; gap: 15px; background: rgba(0,0,0,0.9); }
             .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; }
             .hero-title { font-size: 4rem; }
-            .services-grid { grid-template-columns: 1fr; }
-            .grid-container { grid-template-columns: repeat(2, 1fr); }
-            .container-inner { padding-top: 60px; }
+            .services-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+            .service-card { padding: 15px 10px; align-items: center; text-align: center; }
+            .service-icon { margin-bottom: 10px; width: 35px; height: 35px; }
+            .service-title { font-size: 0.85rem; margin-bottom: 0; }
+            .service-desc { display: none; }
+            .grid-container { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+            .container-inner { padding-top: 160px; } /* Ajuste de padding para compensar navbar alto */
         }
         @media (max-width: 480px) {
             .hero-title { font-size: 3rem; }
             .section-watermark { font-size: 3.5rem; }
-            .grid-container { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .grid-card { padding: 15px; }
+            .grid-container { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .grid-card { padding: 10px; }
+            .grid-card .favicon { width: 30px; height: 30px; margin-bottom: 8px; }
+            .grid-card span { font-size: 0.7rem; }
             .ebook-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -580,7 +586,6 @@
                             <h2 class="section-title">Projetos</h2>
                             <span class="section-watermark">Projetos</span>
                         </div>
-                        <a href="#conexoes" class="view-all-btn">Ver Redes</a>
                     </div>
 
                     <div class="services-grid">
@@ -734,7 +739,6 @@
                         <h2 class="section-title">Obras Publicadas</h2>
                         <span class="section-watermark">Publicações</span>
                     </div>
-                    <a href="https://kiwify.com.br" target="_blank" class="view-all-btn">Ver Loja</a>
                 </div>
         
                 <section class="content-section">
