@@ -157,6 +157,7 @@
             height: 100%;
             background: linear-gradient(90deg, rgba(16,16,16,0.95) 0%, rgba(16,16,16,0.6) 50%, rgba(16,16,16,0.1) 100%);
             z-index: 2;
+            pointer-events: none; /* Correção: Evita bloquear cliques */
         }
         /* Gradiente para fundir o hero com o resto da página */
         .hero-bottom-fade {
@@ -167,6 +168,7 @@
             height: 150px;
             background: linear-gradient(to top, var(--bg-pure) 0%, transparent 100%);
             z-index: 3;
+            pointer-events: none; /* Correção: Evita bloquear cliques */
         }
         .hero-content {
             position: relative;
@@ -527,8 +529,8 @@
 </head>
 <body>
 
-    <!-- Container do Particles.js -->
-    <div id="particles-js" style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1;"></div>
+    <!-- Container do Particles.js com pointer-events: none; para liberar os cliques dos botões abaixo -->
+    <div id="particles-js" style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; pointer-events: none;"></div>
 
     <header class="navbar">
         <div class="nav-container">
@@ -787,7 +789,7 @@
                 "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out" }
             },
             "interactivity": {
-                "detect_on": "window",
+                "detect_on": "window", /* Ele continuará pegando as interações da página perfeitamente mesmo após a modificação! */
                 "events": {
                     "onhover": { "enable": true, "mode": "grab" },
                     "onclick": { "enable": true, "mode": "push" },
