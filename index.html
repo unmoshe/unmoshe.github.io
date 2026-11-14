@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>unmoshe</title>
-    
+
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <style>
         /* ==========================================================================
-           Configurações Base e Identidade Visual (Tema Monocromático Premium)
+           #BASE - Variáveis, Reset e Corpo
            ========================================================================== */
         :root {
             --bg-pure: #101010;
@@ -41,14 +41,13 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
-            -webkit-user-select: none;   
-            -moz-user-select: none;      
-            -ms-user-select: none;       
-            user-select: none;           
-            -webkit-touch-callout: none; 
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
         }
 
-        /* Efeito de Ruído no Fundo */
         body::before {
             content: "";
             position: fixed;
@@ -72,7 +71,7 @@
         }
 
         /* ==========================================================================
-           Navegação
+           #NAVBAR - Barra de Navegação
            ========================================================================== */
         .navbar {
             width: 100%;
@@ -122,7 +121,6 @@
         .nav-links a.active {
             color: var(--text-pure);
         }
-        
         .btn-talk {
             background-color: var(--accent-color);
             color: #000 !important;
@@ -136,7 +134,7 @@
         }
 
         /* ==========================================================================
-           Fullscreen Hero
+           #HERO - Tela Inicial
            ========================================================================== */
         .hero-fullscreen {
             height: 100vh;
@@ -229,7 +227,7 @@
         }
 
         /* ==========================================================================
-           Seções com Estilo Template (Títulos e Marca D'água)
+           #SECTIONS - Cabeçalhos de Seção
            ========================================================================== */
         .section-header {
             display: flex;
@@ -275,7 +273,7 @@
         }
 
         /* ==========================================================================
-           Cards de Projetos (Estilo Services)
+           #CARDS - Projetos (Estilo Services)
            ========================================================================== */
         .content-section {
             margin-bottom: 120px;
@@ -327,7 +325,9 @@
             color: #333;
         }
 
-        /* Grids Menores (Conexões / Plataformas) */
+        /* ==========================================================================
+           #GRID-CARDS - Conexões / Games
+           ========================================================================== */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -366,7 +366,7 @@
         }
 
         /* ==========================================================================
-           Página Sobre (Nova Estrutura)
+           #SOBRE - Página de Apresentação
            ========================================================================== */
         .about-intro-block {
             display: flex;
@@ -515,6 +515,43 @@
             line-height: 1.65;
         }
 
+        /* Problemas Conhecidos */
+        .about-issues {
+            max-width: 700px;
+            margin: 0 auto 70px;
+            background: var(--bg-card);
+            border-left: 3px solid #666;
+            padding: 30px;
+            border-radius: 6px;
+        }
+        .about-issues h4 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        .about-issues p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .about-issues p::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+        .about-issues p:last-child {
+            margin-bottom: 0;
+        }
+        .about-issues strong {
+            color: var(--text-pure);
+        }
+
         /* Quote Box */
         .about-quote-box {
             position: relative;
@@ -578,7 +615,101 @@
         }
 
         /* ==========================================================================
-           SPA e Utilidades
+           #CONSTRUCAO - Página Projetos (Em Construção)
+           ========================================================================== */
+        .construction-wrapper {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .construction-badge {
+            display: inline-block;
+            background: #2a2a2a;
+            color: var(--accent-color);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+        }
+        .construction-badge i {
+            margin-right: 8px;
+        }
+        .construction-lead {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 60px;
+            color: var(--text-muted);
+        }
+        .construction-lead strong {
+            color: var(--text-pure);
+        }
+        .construction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+        .construction-card {
+            background: var(--bg-card);
+            border: 1px dashed #2a2a2a;
+            border-radius: 8px;
+            padding: 35px 25px;
+            text-align: center;
+            position: relative;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .construction-card:hover {
+            border-color: #444;
+            transform: translateY(-5px);
+        }
+        .construction-card i {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 18px;
+            display: block;
+            opacity: 0.7;
+        }
+        .construction-card h4 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--text-pure);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        .construction-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .construction-status {
+            display: inline-block;
+            font-family: var(--font-heading);
+            font-size: 0.65rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #666;
+            margin-top: 15px;
+            padding: 4px 10px;
+            border: 1px solid #333;
+            border-radius: 3px;
+        }
+        .construction-footer {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            padding-top: 30px;
+            border-top: 1px solid #1f1f1f;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ==========================================================================
+           #UTILITARIOS - SPA e Animações
            ========================================================================== */
         .secao-pagina {
             display: none;
@@ -593,7 +724,7 @@
         }
 
         /* ==========================================================================
-           Rodapé
+           #FOOTER - Rodapé
            ========================================================================== */
         .site-footer {
             border-top: 1px solid #1a1a1a;
@@ -612,7 +743,7 @@
         }
 
         /* ==========================================================================
-           RESPONSIVIDADE
+           #RESPONSIVO - Media Queries
            ========================================================================== */
         @media (max-width: 900px) {
             .hero-title { font-size: 5rem; }
@@ -622,7 +753,6 @@
         }
 
         @media (max-width: 768px) {
-            /* Navbar compacta em linha única */
             .navbar {
                 background: rgba(0,0,0,0.92);
                 padding-top: 0;
@@ -638,7 +768,7 @@
             .logo-text .title { font-size: 1.1rem; }
             .nav-links {
                 flex-wrap: nowrap;
-                gap: 12px;
+                gap: 10px;
                 justify-content: flex-end;
             }
             .nav-links a {
@@ -667,14 +797,21 @@
 
             .grid-container { grid-template-columns: repeat(3, 1fr); gap: 10px; }
 
-            /* Sobre — mobile */
             .about-avatar { width: 85px; height: 85px; font-size: 2.4rem; }
             .about-tagline { font-size: 0.78rem; letter-spacing: 2px; }
             .about-lead p { font-size: 1rem; }
-            .about-facts { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .about-facts { grid-template-columns: repeat(3, 1fr); gap: 12px; }
             .about-quote-box { padding: 40px 25px; }
             .about-quote-box p { font-size: 1.05rem; }
             .about-section-title { font-size: 1.4rem; }
+            .about-issues { padding: 25px 20px; }
+
+            .construction-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .construction-card { padding: 25px 15px; }
+            .construction-card i { font-size: 1.5rem; }
+            .construction-card h4 { font-size: 0.85rem; letter-spacing: 1px; }
+            .construction-card p { font-size: 0.8rem; }
+            .construction-lead { font-size: 1rem; margin-bottom: 40px; }
         }
 
         @media (max-width: 480px) {
@@ -699,7 +836,6 @@
             .grid-card .favicon { width: 30px; height: 30px; margin-bottom: 8px; }
             .grid-card span { font-size: 0.65rem; letter-spacing: 0.5px; word-break: break-word; }
 
-            /* Sobre — mobile pequeno */
             .about-facts { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .fact-card { padding: 18px 10px; }
             .fact-card i { font-size: 1.2rem; margin-bottom: 8px; }
@@ -712,11 +848,18 @@
             .about-quote-box i { font-size: 1.5rem; margin-bottom: 15px; }
             .about-closing p { font-size: 0.92rem; }
             .about-closing p:first-child { font-size: 1.05rem; }
+            .about-issues { padding: 20px 15px; margin-bottom: 50px; }
+            .about-issues h4 { font-size: 0.8rem; }
+            .about-issues p { font-size: 0.85rem; padding-left: 15px; }
+
+            .construction-grid { grid-template-columns: 1fr; }
+            .construction-badge { font-size: 0.65rem; padding: 6px 14px; }
         }
 
         @media (max-width: 380px) {
-            .nav-links a { font-size: 0.6rem; letter-spacing: 0.5px; }
-            .btn-talk { padding: 5px 8px; font-size: 0.6rem !important; }
+            .nav-links { gap: 8px; }
+            .nav-links a { font-size: 0.58rem; letter-spacing: 0.5px; }
+            .btn-talk { padding: 5px 8px; font-size: 0.58rem !important; }
             .logo-text .title { font-size: 1rem; }
             .hero-title { font-size: 2.6rem; }
         }
@@ -724,8 +867,14 @@
 </head>
 <body>
 
+    <!-- ======================================================================
+         #PARTICLES - Fundo animado
+         ====================================================================== -->
     <div id="particles-js" style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; pointer-events: none;"></div>
 
+    <!-- ======================================================================
+         #NAVBAR - Menu principal
+         ====================================================================== -->
     <header class="navbar">
         <div class="nav-container">
             <a href="#" class="logo-wrapper">
@@ -734,24 +883,29 @@
                 </div>
             </a>
             <nav class="nav-links">
-                <a href="#inicio" onclick="mudarPagina(event, 'inicio', this)" class="nav-btn active">Home</a>
+                <a href="#inicio" onclick="mudarPagina(event, 'inicio', this)" class="nav-btn active">Início</a>
                 <a href="#sobre" onclick="mudarPagina(event, 'sobre', this)" class="nav-btn">Sobre Mim</a>
+                <a href="#projetos" onclick="mudarPagina(event, 'projetos', this)" class="nav-btn">Projetos</a>
                 <a href="https://instagram.com/unmoshe" target="_blank" class="nav-btn btn-talk">CONTATO</a>
             </nav>
         </div>
     </header>
 
     <main class="main-container">
-        
+
+        <!-- ==================================================================
+             #INICIO - Página Inicial
+             ================================================================== -->
         <div id="inicio" class="secao-pagina secao-ativa">
-            
+
+            <!-- #HERO - Apresentação fullscreen -->
             <section class="hero-fullscreen">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <span class="hero-hello">Olá, eu sou o</span>
                     <h1 class="hero-title">Moshé</h1>
                     <p class="hero-role">Autodidata & Polímata</p>
-                    
+
                     <div class="hero-socials">
                         <a href="https://instagram.com/unmoshe" target="_blank"><i class="fab fa-instagram"></i></a>
                         <a href="https://youtube.com/@unmoshe" target="_blank"><i class="fab fa-youtube"></i></a>
@@ -763,13 +917,14 @@
             </section>
 
             <div class="container-inner">
-                
-                <section id="projetos" class="content-section">
+
+                <!-- #PORTFOLIO - Projetos concluídos -->
+                <section id="portfolio" class="content-section">
                     <div class="section-header">
                         <div class="title-wrap">
                             <span class="section-number">01.</span>
-                            <h2 class="section-title">Projetos</h2>
-                            <span class="section-watermark">Projetos</span>
+                            <h2 class="section-title">Portfólio</h2>
+                            <span class="section-watermark">Portfólio</span>
                         </div>
                     </div>
 
@@ -780,10 +935,10 @@
                             <p class="service-desc">Acesse o portal ateísta. Filosofia, memes e conteúdo anti-religioso.</p>
                         </a>
 
-                        <a href="https://subsoloalternativo.github.io" target="_blank" class="service-card">
-                            <img src="icons/SUBALT.webp" alt="SubAlt" class="service-icon">
-                            <h3 class="service-title">Subsolo Alternativo</h3>
-                            <p class="service-desc">Mergulhe no universo musical obscuro dos anos 80, new wave e post-punk.</p>
+                        <a href="https://www.tiktok.com/@dosedehits" target="_blank" class="service-card">
+                            <img src="icons/DDH.webp" alt="Dose de Hits" class="service-icon">
+                            <h3 class="service-title">Dose de Hits</h3>
+                            <p class="service-desc">A melhor seleção de trechos musicais legendados para expressar cada emoção.</p>
                         </a>
 
                         <a href="https://youtube.com/@tapadosfatos/" target="_blank" class="service-card">
@@ -794,6 +949,7 @@
                     </div>
                 </section>
 
+                <!-- #CONEXOES - Redes sociais -->
                 <section id="conexoes" class="content-section">
                     <div class="section-header">
                         <div class="title-wrap">
@@ -802,7 +958,7 @@
                             <span class="section-watermark">Conexões</span>
                         </div>
                     </div>
-                    
+
                     <div class="grid-container">
                         <a class="grid-card" href="https://www.facebook.com/unmoshe/" target="_blank">
                             <img src="https://www.google.com/s2/favicons?domain=facebook.com&sz=128" alt="Facebook" class="favicon">
@@ -831,6 +987,7 @@
                     </div>
                 </section>
 
+                <!-- #GAMES - Plataformas de jogos -->
                 <section id="plataformas" class="content-section">
                     <div class="section-header">
                         <div class="title-wrap">
@@ -839,7 +996,7 @@
                             <span class="section-watermark">Games & Outros</span>
                         </div>
                     </div>
-                    
+
                     <div class="grid-container">
                         <a class="grid-card" href="https://steamcommunity.com/id/unmoshe" target="_blank">
                             <img src="https://www.google.com/s2/favicons?domain=steamcommunity.com&sz=128" alt="Steam" class="favicon">
@@ -870,10 +1027,12 @@
             </div>
         </div>
 
-        <!-- ============== SOBRE MIM (NOVA ESTRUTURA) ============== -->
+        <!-- ==================================================================
+             #SOBRE - Página de Apresentação
+             ================================================================== -->
         <div id="sobre" class="secao-pagina">
             <div class="container-inner">
-                
+
                 <div class="section-header" style="justify-content: center; text-align: center;">
                     <div class="title-wrap">
                         <span class="section-number">Sobre</span>
@@ -882,22 +1041,22 @@
                     </div>
                 </div>
 
-                <!-- Avatar + Tagline -->
+                <!-- #SOBRE-INTRO - Avatar + Tagline -->
                 <div class="about-intro-block">
                     <div class="about-avatar">
                         <i class="fas fa-user-secret"></i>
                     </div>
-                    <p class="about-tagline">Autodidata · Ateu · Entusiasta dos Anos 80</p>
+                    <p class="about-tagline">Autodidata · Ateu · Centrista · Xadrez & Ciclismo</p>
                 </div>
 
-                <!-- Lead -->
+                <!-- #SOBRE-LEAD - Texto de abertura -->
                 <div class="about-lead">
                     <p>
-                        Na minha bio diz "Autodidata e polímata". Em bom português: eu tenho uma certa alergia ao tédio e aprendo sozinho o que me dá na telha. Meus projetos e designs são invariavelmente criados usando temas dark, sempre com fundo preto. E antes que você pergunte, <strong>não, não é porque eu sou um rockeiro revoltado</strong> com a sociedade — é simplesmente porque preto é a minha cor favorita.
+                        Se você veio procurar uma bio corporativa, aperte o X aí em cima e siga sua vida. Sou o Moshé: autodidata, polímata e com paciência de tamanho único. Aprendo sozinho o que me dá na telha e projeto tudo em preto porque <strong>preto é minha cor favorita</strong>, e gosto pessoal não se discute. Ciclismo é o esporte que pratico. Xadrez é o hobby que me mantém são. Ragebait na internet é o que me mantém entretido.
                     </p>
                 </div>
 
-                <!-- Ficha técnica -->
+                <!-- #SOBRE-FACTS - Ficha Técnica -->
                 <div class="about-facts">
                     <div class="fact-card">
                         <i class="fas fa-user-secret"></i>
@@ -905,14 +1064,24 @@
                         <span class="fact-value">Moshé</span>
                     </div>
                     <div class="fact-card">
-                        <i class="fas fa-music"></i>
-                        <span class="fact-label">Vibe</span>
-                        <span class="fact-value">Anos 80</span>
+                        <i class="fas fa-cross"></i>
+                        <span class="fact-label">Fé</span>
+                        <span class="fact-value">Ateu</span>
                     </div>
                     <div class="fact-card">
-                        <i class="fas fa-cross"></i>
-                        <span class="fact-label">Crença</span>
-                        <span class="fact-value">Ateu</span>
+                        <i class="fas fa-balance-scale"></i>
+                        <span class="fact-label">Política</span>
+                        <span class="fact-value">Centro</span>
+                    </div>
+                    <div class="fact-card">
+                        <i class="fas fa-chess-knight"></i>
+                        <span class="fact-label">Hobby</span>
+                        <span class="fact-value">Xadrez</span>
+                    </div>
+                    <div class="fact-card">
+                        <i class="fas fa-bicycle"></i>
+                        <span class="fact-label">Esporte</span>
+                        <span class="fact-value">Ciclismo</span>
                     </div>
                     <div class="fact-card">
                         <i class="fas fa-palette"></i>
@@ -921,62 +1090,147 @@
                     </div>
                 </div>
 
-                <!-- Interesses -->
+                <!-- #SOBRE-INTERESSES - Grid de interesses -->
                 <h3 class="about-section-title">Interesses</h3>
                 <div class="interest-grid">
                     <div class="interest-card">
                         <i class="fas fa-music"></i>
                         <h4>Música</h4>
-                        <p>New wave, rock, metal e post-punk. Se tiver um sintetizador deprê, eu tô dando play.</p>
+                        <p>Rock, metal e o melhor post-punk dos anos 80. Synthpop deprê é meu cardio emocional.</p>
                     </div>
                     <div class="interest-card">
                         <i class="fas fa-film"></i>
-                        <h4>Cinema</h4>
-                        <p>Gore realista, terror psicológico e dramas com sacadas intelectuais afiadas. Sem violência ou crítica? Que seja insano e megalomaníaco.</p>
+                        <h4>Cinema & Séries</h4>
+                        <p>O Lobo de Wall Street é o filme. 007 é a franquia. Better Call Saul e The Walking Dead fecham o pacote. Se discordar, problema seu.</p>
                     </div>
                     <div class="interest-card">
                         <i class="fas fa-fist-raised"></i>
                         <h4>Esportes</h4>
-                        <p>UFC, futebol e tênis. Alguém sendo nocauteado é entretenimento de qualidade; tênis é o meu estado zen.</p>
+                        <p>Pratico ciclismo. Assisto futebol e MMA. Ver nocaute também conta como cardio, só que emocional.</p>
+                    </div>
+                    <div class="interest-card">
+                        <i class="fas fa-globe"></i>
+                        <h4>Países Favoritos</h4>
+                        <p>Rússia e Japão, nessa ordem. A Rússia puxa a fila como principal influência. O Japão vem logo atrás, porque ninguém é de ferro.</p>
+                    </div>
+                    <div class="interest-card">
+                        <i class="fas fa-crown"></i>
+                        <h4>Ídolos</h4>
+                        <p>Vladimir Putin e Conor McGregor. Um comanda um país, o outro comanda um octógono. Cada um no seu quadrado. Não vou elaborar.</p>
+                    </div>
+                    <div class="interest-card">
+                        <i class="fas fa-gamepad"></i>
+                        <h4>Games</h4>
+                        <p>GTA, Battlefield, Call of Duty e Counter Strike. Estratégia, tiro e o melhor do entretenimento digital.</p>
                     </div>
                     <div class="interest-card">
                         <i class="fas fa-crosshairs"></i>
-                        <h4>Armas & Táticas</h4>
-                        <p>Fascinado por táticas militares e pelo universo 007. James Bond aprova — e eu também.</p>
-                    </div>
-                    <div class="interest-card">
-                        <i class="fas fa-bug"></i>
-                        <h4>Animais</h4>
-                        <p>Adoro animais — exceto cobras. Insetos? Nem tanto, mas formigas e aranhas pagam o aluguel com trabalho braçal.</p>
-                    </div>
-                    <div class="interest-card">
-                        <i class="fas fa-chess-knight"></i>
-                        <h4>Games & Xadrez</h4>
-                        <p>Xadrez, Steam e bons jogos. Estratégia, raciocínio e lazer — a vida precisa dos três.</p>
+                        <h4>Interesses Gerais</h4>
+                        <p>Tecnologia, armas e espionagem. James Bond não sou eu, mas a vibe é parecida. Faltam só o Aston Martin e o sotaque.</p>
                     </div>
                 </div>
 
-                <!-- Quote -->
+                <!-- #SOBRE-ISSUES - Traço tóxico e antipatias -->
+                <div class="about-issues">
+                    <h4>Problemas Conhecidos</h4>
+                    <p><strong>Traço tóxico:</strong> fazer ragebait na internet.</p>
+                    <p><strong>Antipatias:</strong> crente fanático e baba-ovos de político ou de ideologia.</p>
+                    <p><strong>Aviso:</strong> se você se encaixa nas categorias acima, o problema é seu. Se não, seja bem-vindo.</p>
+                </div>
+
+                <!-- #SOBRE-QUOTE - Citação em destaque -->
                 <div class="about-quote-box">
                     <i class="fas fa-quote-left"></i>
-                    <p>"Minha verdadeira paixão está nos anos 80. Meu gosto musical é uma viagem direta pra essa década: new wave, rock, metal e post-punk. Se tiver um sintetizador deprê, eu tô dando play."</p>
+                    <p>"Minha verdadeira paixão está nos anos 80. Se tiver um sintetizador deprê, eu tô dando play. Se não tiver, também tô. Spotify não julga."</p>
                 </div>
 
-                <!-- Fechamento -->
+                <!-- #SOBRE-CLOSING - Fechamento -->
                 <div class="about-closing">
-                    <p><strong>No fim das contas, sou um cara reservado.</strong></p>
-                    <p>Tudo o que você acabou de ler é a amostra grátis. O resto da minha vida ou é privado demais para a internet, ou você vai ter que me conhecer pessoalmente para descobrir os detalhes. Um abraço e até a próxima.</p>
+                    <p><strong>Agora vem a parte que você provavelmente está esperando.</strong></p>
+                    <p>Idade? Suficiente para saber o que é um disquete e jovem o suficiente para não usar um. Cidade? A que tiver ciclovia e wifi decente. Comida favorita? A que estiver no prato quando eu terminar de escrever isso. O resto é lore paga e você não pagou por ela.</p>
                 </div>
 
             </div>
         </div>
 
+        <!-- ==================================================================
+             #PROJETOS - Página de Projetos (Em Construção)
+             ================================================================== -->
+        <div id="projetos" class="secao-pagina">
+            <div class="container-inner">
+
+                <div class="section-header" style="justify-content: center; text-align: center;">
+                    <div class="title-wrap">
+                        <span class="section-number">Futuro</span>
+                        <h2 class="section-title">Projetos</h2>
+                        <span class="section-watermark" style="left: 50%; transform: translate(-50%, -50%);">EM OBRAS</span>
+                    </div>
+                </div>
+
+                <div class="construction-wrapper">
+
+                    <!-- #PROJETOS-BADGE - Aviso de status -->
+                    <span class="construction-badge"><i class="fas fa-hammer"></i> Em Construção</span>
+
+                    <!-- #PROJETOS-LEAD - Texto de abertura -->
+                    <p class="construction-lead">
+                        Este canto do site existe para abrigar <strong>aplicativos, jogos, sites úteis e ebooks</strong>. Alguns já estão sendo montados nos bastidores. Outros estão esperando o momento exato em que a coragem bater na porta. Até lá, o espaço fica decorado com boas intenções e um ícone de martelo.
+                    </p>
+
+                    <!-- #PROJETOS-GRID - Cards de categorias futuras -->
+                    <div class="construction-grid">
+
+                        <div class="construction-card">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h4>Aplicativos</h4>
+                            <p>Ideias anotadas, café comprado, código pela metade. Falta só o resto.</p>
+                            <span class="construction-status">Forno aceso</span>
+                        </div>
+
+                        <div class="construction-card">
+                            <i class="fas fa-gamepad"></i>
+                            <h4>Jogos</h4>
+                            <p>Conceito pronto. A jogabilidade é surpresa até pra mim.</p>
+                            <span class="construction-status">Rascunhado</span>
+                        </div>
+
+                        <div class="construction-card">
+                            <i class="fas fa-globe"></i>
+                            <h4>Sites Úteis</h4>
+                            <p>Aquele site que você não sabia que precisava. E talvez continue não sabendo.</p>
+                            <span class="construction-status">No papel</span>
+                        </div>
+
+                        <div class="construction-card">
+                            <i class="fas fa-book"></i>
+                            <h4>Ebooks</h4>
+                            <p>Rascunhos na gaveta, capricho em construção. Paciência é grátis e você tem de sobra.</p>
+                            <span class="construction-status">A caminho</span>
+                        </div>
+
+                    </div>
+
+                    <!-- #PROJETOS-FOOTER - Mensagem final -->
+                    <p class="construction-footer">
+                        Enquanto isso, o Portfólio na página inicial já mostra o que está pronto. Sem pressa. O autor trabalha melhor sob tédio controlado.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
     </main>
 
+    <!-- ======================================================================
+         #FOOTER - Rodapé
+         ====================================================================== -->
     <footer class="site-footer">
         <span class="copyright">© 2026 unmoshe | Todos os direitos reservados</span>
     </footer>
 
+    <!-- ======================================================================
+         #SCRIPTS - Particles.js
+         ====================================================================== -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {
@@ -1005,11 +1259,14 @@
         });
     </script>
 
+    <!-- ======================================================================
+         #SCRIPTS - Proteção contra cópia e SPA
+         ====================================================================== -->
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('copy', event => event.preventDefault());
         document.addEventListener('dragstart', event => event.preventDefault());
-        
+
         document.addEventListener('keydown', event => {
             const ctrlOuCmd = event.ctrlKey || event.metaKey;
             const teclasProibidas = ['c', 'C', 'a', 'A', 'u', 'U', 's', 'S'];
@@ -1022,13 +1279,13 @@
         });
 
         function mudarPagina(event, idPagina, elementoClicado) {
-            event.preventDefault(); 
-            
+            event.preventDefault();
+
             let secoes = document.querySelectorAll('.secao-pagina');
             secoes.forEach(secao => {
                 secao.classList.remove('secao-ativa');
             });
-            
+
             document.getElementById(idPagina).classList.add('secao-ativa');
 
             let links = document.querySelectorAll('.nav-btn');
@@ -1039,7 +1296,7 @@
             if(elementoClicado) {
                 elementoClicado.classList.add('active');
             }
-            
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
